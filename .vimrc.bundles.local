@@ -1,0 +1,3 @@
+Bundle 'wakatime/vim-wakatime'
+Bundle 'suan/vim-instant-markdown'
+"Bundle 'isnowfy/python-vim-instant-markdown'
