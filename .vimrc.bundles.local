@@ -1,3 +1,9 @@
 Bundle 'wakatime/vim-wakatime'
 Bundle 'suan/vim-instant-markdown'
-"Bundle 'isnowfy/python-vim-instant-markdown'
+Bundle 'Konfekt/FastFold'
+Bundle 'Konfekt/FoldText'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-easytags'
+
+
+
