@@ -24,7 +24,7 @@ let g:spf13_bundle_groups=['general', 'programming', 'misc', 'python','youcomple
 " "Configure shell checker
  let g:syntastic_sh_checkers= ['shellcheck']
  set tags=./tags,tags;$HOME
-
+" http://idea.qinxi1992.cn
  "open a NERDTree automatically when vim starts up
  autocmd vimenter * NERDTree
  ""Tagbar
