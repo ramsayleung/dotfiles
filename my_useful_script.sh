@@ -36,3 +36,6 @@ if output=$(pip --version 2> /tmp/output);then
 else
     yum install pip
 fi
+
+echo "start to install the advance logfile Navigator"
+yum install lnav
