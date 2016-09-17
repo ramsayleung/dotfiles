@@ -8,7 +8,7 @@
 #Display color in man page
 #when you are using fedora 22 or above ,yum will automatically redirect to dnf
 echo "start to install most"
-yum install most
+yum -y install most
 
 if test -n "$ZSH_VERSION";then
     echo 'export PAGER="most"' >> ~/.zshrc
@@ -34,8 +34,6 @@ fi
 if output=$(pip --version 2> /tmp/output);then
     pip install percol
 else
-    yum install pip
+    yum -y install pip
 fi
 
-echo "start to install the advance logfile Navigator"
-yum install lnav
