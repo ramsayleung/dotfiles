@@ -24,3 +24,6 @@ yum -y install lnav
 echo "start to install Zeal"
 yum -y install zeal
 
+#glances is a cross-platform system monitoring tool written in python
+echo "start to instal Glances"
+yum -y install glances
