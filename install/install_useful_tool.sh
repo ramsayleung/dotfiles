@@ -31,3 +31,7 @@ yum -y install glances
 #Install adobe font: source-code-pro-fonts
 echo "start to install source code pro fonts "
 yum -y install adobe-source-code-pro-fonts
+
+#colordiff shows color when runs diff
+echo "start to install colordiff"
+yum -y install colordiff

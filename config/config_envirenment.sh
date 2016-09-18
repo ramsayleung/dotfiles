@@ -13,21 +13,24 @@ yum -y install most
 if test -n "$ZSH_VERSION";then
     echo 'export PAGER="most"' >> ~/.zshrc
 else test -n "$BASH_VERSION"
-    echo 'export PAGER="most"' >> ~/.bashrc
+     echo 'export PAGER="most"' >> ~/.bashrc
 fi
 
 #set alias for some specfic file
 echo "set alias for some specfic file"
 if test -n "$ZSH_VERSION";then
-    alias -s gz='tar -xzvf'
-    alias -s tgz='tar -xzvf'
-    alias -s zip='unzip'
-    alias -s bz2='tar -xjvf'
-    alias -s php=vi
-    alias -s py=vi
-    alias -s rb=vi
-    alias -s html=vi
+    echo "alias -s gz='tar -xzvf'" >> ~/.zshrc
+    echo "alias -s tgz='tar -xzvf'" >> ~/.zshrc
+    echo "alias -s zip='unzip'" >> ~/.zshrc
+    echo "alias -s bz2='tar -xjvf'" >> ~/.zshrc
+    echo "alias -s php=vi" >> ~/.zshrc
+    echo "alias -s py=vi" >> ~/.zshrc
+    echo "alias -s rb=vi" >> ~/.zshrc
+    echo "alias -s html=vi" >> ~/.zshrc
 fi
+
+
+
 #after that,when you type "xxxx.php" in your terminal,you will automatically open xxxx.php with vi
 #likewise,when you type "xxxx.tgz" ,it acts as same as you type "tar zxvf xxxx.tgz"
 
@@ -36,4 +39,5 @@ if output=$(pip --version 2> /tmp/output);then
 else
     yum -y install pip
 fi
+
 
