@@ -27,3 +27,7 @@ yum -y install zeal
 #glances is a cross-platform system monitoring tool written in python
 echo "start to instal Glances"
 yum -y install glances
+
+#Install adobe font: source-code-pro-fonts
+echo "start to install source code pro fonts "
+yum -y install adobe-source-code-pro-fonts
