@@ -40,8 +40,13 @@ else
     sshpass -p $password ssh  $user@$hostname -p $port "mkdir -p ~/.ssh;chmod 0700 .ssh"
     sshpass -p $password scp -P $port  ~/.ssh/id_rsa.pub $user@$hostname:~/.ssh/authorized_keys
 fi
+
+#function end_or_error_handler(){
 if [ $(echo $?) = 0 ];then
     echo "Generate successfully"
 else
-    echo "Configure failed for unknown reason,Plese check it again"
+    echo "Configure failed ,Plese check it again"
 fi
+exit
+# }
+# trap end_or_error_handler ERR 
