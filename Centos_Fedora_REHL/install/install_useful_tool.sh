@@ -7,6 +7,10 @@ set -e
 
 #show info when runs cammand
 set -x
+
+#run as root
+sudo -s <<EOF
+
 #top improved ,powerful than top
 echo "install htop"
 yum -y install htop
@@ -35,3 +39,5 @@ yum -y install adobe-source-code-pro-fonts
 #colordiff shows color when runs diff
 echo "start to install colordiff"
 yum -y install colordiff
+
+EOF

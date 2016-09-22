@@ -8,6 +8,10 @@ set -e
 #show info when runs cammand
 set -x
 #top improved ,powerful than top
+
+#run as root 
+sudo -s <<EOF
+
 echo "install htop"
 apt-get -y install htop
 
@@ -35,3 +39,5 @@ apt-get -y install adobe-source-code-pro-fonts
 #colordiff shows color when runs diff
 echo "start to install colordiff"
 apt-get -y install colordiff
+
+EOF

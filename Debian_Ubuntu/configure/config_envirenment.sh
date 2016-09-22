@@ -8,7 +8,7 @@
 #Display color in man page
 #when you are using fedora 22 or above ,apt-get will automatically redirect to dnf
 echo "start to install most"
-apt-get -y install most
+sudo apt-get -y install most
 
 if test -n "$ZSH_VERSION";then
     echo 'export PAGER="most"' >> ~/.zshrc
@@ -34,6 +34,9 @@ fi
 #after that,when you type "xxxx.php" in your terminal,you will automatically open xxxx.php with vi
 #likewise,when you type "xxxx.tgz" ,it acts as same as you type "tar zxvf xxxx.tgz"
 
+#run as root
+sudo -s <<EOF
+
 if output=$(pip --version 2> /tmp/output);then
     pip install percol
 else
@@ -41,3 +44,4 @@ else
 fi
 
 
+EOF
