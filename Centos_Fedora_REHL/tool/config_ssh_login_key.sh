@@ -41,12 +41,12 @@ else
     sshpass -p $password scp -P $port  ~/.ssh/id_rsa.pub $user@$hostname:~/.ssh/authorized_keys
 fi
 
-#function end_or_error_handler(){
+function end_or_error_handler(){
 if [ $(echo $?) = 0 ];then
     echo "Generate successfully"
 else
     echo "Configure failed ,Plese check it again"
 fi
 exit
-# }
-# trap end_or_error_handler ERR 
+}
+trap end_or_error_handler ERR 

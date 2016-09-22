@@ -1,0 +1,33 @@
+set encoding=utf-8  " The encoding displayed.
+set fileencoding=utf-8  " The encoding written to file.
+"Youcomleteme Configuration
+let g:spf13_bundle_groups=['general', 'programming', 'misc', 'python','youcompleteme']
+"
+" Syntastic Configuration
+
+ set statusline+=%#warningmsg#
+ set statusline+=%{SyntasticStatuslineFlag()}
+ set statusline+=%*
+
+ let g:syntastic_always_populate_loc_list = 1
+ let g:syntastic_auto_loc_list = 1
+ let g:syntastic_check_on_open = 1
+ let g:syntastic_check_on_wq = 0
+"
+" "choose a syntastic checker for python
+ let g:syntastic_python_checkers = ['pylint']
+" "Configure the python checker to call a Python 3 interpreter rather than
+" Python 2
+" let g:syntastic_python_python_exec = '/usr/bin/python3'
+" "Configure the python checker to call a python2 interpreter
+ let g:syntastic_python_python_exec = '/usr/bin/python2.7'
+" "Configure shell checker
+ let g:syntastic_sh_checkers= ['shellcheck']
+ set tags=./tags,tags;$HOME
+" http://idea.qinxi1992.cn
+ "open a NERDTree automatically when vim starts up
+ autocmd vimenter * NERDTree
+ ""Tagbar
+ nmap <F5> :NERDTreeToggle<CR>
+ nmap <F6> :w<CR>
+ nmap <F8> :TagbarToggle<CR>

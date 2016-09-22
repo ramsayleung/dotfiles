@@ -6,9 +6,9 @@
 #Install oh-my-zsh which is a delightful framework to manage zsh configuration
 
 #Display color in man page
-#when you are using fedora 22 or above ,yum will automatically redirect to dnf
+#when you are using fedora 22 or above ,apt-get will automatically redirect to dnf
 echo "start to install most"
-yum -y install most
+apt-get -y install most
 
 if test -n "$ZSH_VERSION";then
     echo 'export PAGER="most"' >> ~/.zshrc
@@ -37,7 +37,7 @@ fi
 if output=$(pip --version 2> /tmp/output);then
     pip install percol
 else
-    yum -y install pip
+    apt-get -y install pip
 fi
 
 
