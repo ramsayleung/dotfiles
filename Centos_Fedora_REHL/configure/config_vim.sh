@@ -5,8 +5,8 @@ echo "install spf for vim"
 curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
 
 echo "Configure youcompleteme"
-yum install automake gcc gcc-c++ kernel-devel cmake
-yum install python-devel python3-devel
+sudo yum install automake gcc gcc-c++ kernel-devel cmake
+sudo yum install python-devel python3-devel
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py --clang-completer
 

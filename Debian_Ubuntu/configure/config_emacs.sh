@@ -4,6 +4,9 @@
 set -e
 set -x
 
+#run as root
+sudo -s <<EOF
+
 #emacs javascript-edit mode (ie js2-mode depedency):
 #install "tern" to use the auto-completion and documentation features
 echo "Start to install tern"
@@ -68,5 +71,6 @@ pip install service_factory
 echo "Start to install epc"
 pip install epc
 
+EOF
 echo "Start to install spacemacs"
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
