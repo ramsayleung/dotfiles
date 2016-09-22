@@ -14,7 +14,7 @@ echo "configure tagbar"
 wget http://downloads.sourceforge.net/project/ctags/ctags/5.8/ctags-5.8.tar.gz
 tar zxvf  ctags-5.8.tar.gz
 cd ctags-5.8
-./configure && make && make install
+./configure && make && sudo make install
 #remove ctags-5.8.tar.gz and ctags-5.8
 cd ..
 rm -rf ctags-5.8*
