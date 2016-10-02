@@ -3,7 +3,7 @@
 #install the tools i think are useful
 
 #stop run script when error raises
-set -e
+# set -e
 
 #show info when runs cammand
 set -x
@@ -13,13 +13,15 @@ set -x
 sudo -s <<EOF
 apt-get -y update
 
+#check if htop has been installed
+
 echo "install htop"
 apt-get -y install htop
 
 #a code searching tool similar to "ack" ,maybe it is more familar with grep
 #,ag is with a focus on speed
 echo "install the_silver_searcher(ag)"
-apt-get - y install the_silver_searcher
+apt-get -y install the_silver_searcher
 
 #lnav is an advanced log file navigator
 echo "start to install the advance logfile Navigator"
@@ -57,3 +59,6 @@ apt-get -y install nodejs
 apt-get -y install npm
 
 EOF
+#run other script until this finish
+wait
+

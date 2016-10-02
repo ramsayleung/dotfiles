@@ -54,3 +54,6 @@ yum install nodejs -y
 yum install npm -y
 
 EOF
+
+#run other script until this finish 
+wait
