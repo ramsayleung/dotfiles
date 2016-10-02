@@ -6,7 +6,6 @@ set -x
 
 #run as root
 sudo -s <<EOF
-apt-get install -y emacs 
 
 #emacs javascript-edit mode (ie js2-mode depedency):
 #install "tern" to use the auto-completion and documentation features

@@ -8,7 +8,6 @@ set -x
 sudo -s <<EOF
 
 echo "start to install emacs "
-yum -y install emacs
 
 #emacs javascript-edit mode (ie js2-mode depedency):
 #install "tern" to use the auto-completion and documentation features

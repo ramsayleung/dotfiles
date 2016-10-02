@@ -40,4 +40,17 @@ yum -y install adobe-source-code-pro-fonts
 echo "start to install colordiff"
 yum -y install colordiff
 
+echo "start to install emacs"
+yum -y install emacs
+
+echo "start to install pip "
+#python2
+yum install python-pip python-wheel -y
+#python3 
+yum install python3 python3-wheel -y
+
+echo "start to install nodejs and npm"
+yum install nodejs -y
+yum install npm -y
+
 EOF

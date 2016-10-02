@@ -5,6 +5,12 @@
 set -e
 set -x
 current_directory=`pwd`
+for install_file in ./install/*
+do
+    chmod +x $install_file
+    #run the install script
+    $install_file
+done
 for config_file in ./configure/*
 do
     if [ `basename $config_file` = 'echo_zshrc.sh' ];then

@@ -11,6 +11,7 @@ set -x
 
 #run as root 
 sudo -s <<EOF
+apt-get -y update
 
 echo "install htop"
 apt-get -y install htop
@@ -39,5 +40,20 @@ apt-get -y install adobe-source-code-pro-fonts
 #colordiff shows color when runs diff
 echo "start to install colordiff"
 apt-get -y install colordiff
+
+echo "start to install emacs "
+apt-get -y install emacs
+
+echo "start to install git "
+
+apt-get -y install git
+
+echo "start to install pip"
+apt-get install python-pip python-dev build-essential -y  
+pip install --upgrade pip 
+
+echo "start to install npm and nodejs"
+apt-get -y install nodejs
+apt-get -y install npm
 
 EOF
