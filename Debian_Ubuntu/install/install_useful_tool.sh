@@ -58,6 +58,9 @@ echo "start to install npm and nodejs"
 apt-get -y install nodejs
 apt-get -y install npm
 
+#httpie:a cli,curl-like tool for humans(but better)
+echo "start to install httpie"
+apt-get -y install httpie
 EOF
 #run other script until this finish
 wait

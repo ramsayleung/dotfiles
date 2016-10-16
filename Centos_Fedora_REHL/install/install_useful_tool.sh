@@ -53,6 +53,9 @@ echo "start to install nodejs and npm"
 yum install nodejs -y
 yum install npm -y
 
+#httpie:a cli,curl-like tool for humans(but better)
+echo "start to install httpie"
+yum -y install httpie
 EOF
 
 #run other script until this finish 
