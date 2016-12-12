@@ -1,15 +1,7 @@
 #!/bin/bash
 #Author:Samray
 #Description:
-#init all the configurations and start install 
-set -e
-set -x
-current_directory=`pwd`
-for install_file in ./install/*
-do
-    chmod +x $install_file
-    $install_file
-done
+#init all e
 for config_file in ./configure/*
 do
     if [ `basename $config_file` = 'echo_zshrc.sh' ];then

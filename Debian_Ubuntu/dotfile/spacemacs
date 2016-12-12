@@ -27,12 +27,13 @@ values."
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-complete-with-key-sequence nil
-                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-complete-with-key-sequence-delay 0.05
                       auto-completion-enable-help-tooltip t
-                      auto-completion-enable-sort-by-usage t
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-private-snippets-directory nil)
-     ;; better-defaults
+                      auto-completion-enable-sort-by-usage t)
+     better-defaults
+     cfengine
+     imenu-list
+     semantic
      emacs-lisp
      git
      nginx
@@ -42,7 +43,6 @@ values."
      selectric
      org
      github
-     dash
      html
      (c-c++ :variables
         c-c++-default-mode-for-headers 'c-mode
@@ -52,9 +52,12 @@ values."
      shell-scripts
      yaml
      (python :variables
-              python-enable-yapf-format-on-save t)
-   (shell :variables
-            shell-default-term-shell (getenv "SHELL" )
+             python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t)
+     (shell :variables
+            shell-default-term-shell (getenv "SHELL")
+            ;; shell-default-shell 'eshell
+            shell-enable-smart-eshell t
             shell-default-height 30
             shell-default-position 'bottom)
      ;; spell-checking
@@ -64,15 +67,12 @@ values."
      (wakatime :variables
                wakatime-api-key  "df5310e6-9d1f-4cf6-bd9a-fd6a417a6c93"
                ;; use the actual wakatime path
-               wakatime-cli-path "/usr/bin/wakatime")
-     )
-   ;;Line numbers can be toggled on in all "prog-mode" and "text-mode" bffers 
-   dotspacemacs-line-numbers t
+               wakatime-cli-path "/usr/bin/wakatime"))
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(paredit slime)
+   dotspacemacs-additional-packages '(paredit slime (vue-mode :location (recipe :fetcher github :repo "codefalling/vue-mode")))
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -127,12 +127,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai
+   dotspacemacs-themes '(molokai
                          spacemacs-dark
+                         gruvbox
+                         monokai
                          spacemacs-light
                          solarized-light
                          solarized-dark
-                         leuven
                          zenburn)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -238,7 +239,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -278,36 +279,88 @@ before packages are loaded. If you are unsure, you should try in setting them in
 (defun dotspacemacs/user-config ()
   ;;Enable company globally to get auto-completion everywhere even in the modes
   ;;which are not configured by Spacemacs.
+  ;; set key-binding for switch-to-buffer
+  (spacemacs/set-leader-keys "b l" 'switch-to-buffer)
+  ;; Automaticallly format before saving a file(css js html json file)
+  (eval-after-load 'js2-mode
+    '(add-hook 'js2-mode-hook
+               (lambda ()
+                 (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+  ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+  (eval-after-load 'js
+    '(add-hook 'js-mode-hook
+               (lambda ()
+                 (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+  (eval-after-load 'json-mode
+    '(add-hook 'json-mode-hook
+               (lambda ()
+                 (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+  (eval-after-load 'sgml-mode
+    '(add-hook 'html-mode-hook
+               (lambda ()
+                 (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+  (eval-after-load 'web-mode
+    '(add-hook 'web-mode-hook
+               (lambda ()
+                 (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+  (eval-after-load 'css-mode
+    '(add-hook 'css-mode-hook
+               (lambda ()
+                 (add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
+  ;; smartparens-mode will be disable after save for unknown reason in html-mode ,so i have to manual
+  ;; enable it after save
+  (eval-after-load 'web-mode
+    '(add-hook 'web-mode-hook
+               (lambda ()
+                 (add-hook 'after-save-hook 'smartparens-mode))))
+  ;; enable smartparens globally
+  (smartparens-global-mode)
   (global-company-mode)
   ;;Enable global-flycheck-mode 
   (global-flycheck-mode)
+  ;; enable golden-ratio mode (crazy guy ha)
+  (golden-ratio-mode)
   (setq-default
   ;;To change how js2-mode indent code,set variable js2-basic-offset,as such:
   js2-basic-offset 2
   ;;To change how js-mode idents JSON files,set the variable js-indent-level,as such:
   js-indent-level 2)
-  ;;To display the "magit-status" buffer in fullscreen 
+  ;;To display the smagit-status" buffer in fullscreen 
   ;; git-magit-status-fullscreen t)
   ;; Bind clang-format-region to C-M-tab in all modes:
   (global-set-key [C-M-tab] 'clang-format-region)
   ;; Bind clang-format-buffer to tab on the c-mode only:
   (add-hook 'c-mode-hook 'clang-format-bindings)
+  ;; enable paredit-mode when in lisp-mode
+  (add-hook 'lisp-mode-hook 'paredit-mode)
+  ;; enable paredit-mode when in emacs-lisp-mode
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+  ;; enable paredit-mode in scheme-mode
+  (add-hook 'scheme-mode-hook 'paredit-mode)
+  ;; enable yapf-mode when in python-mode to format code
+  (add-hook 'python-mode-hook 'yapf-mode)
   (add-hook 'c++-mode-hook 'clang-format-bindings)
   (defun clang-format-bindings ()
     (define-key c-mode-map [tab] 'clang-format-buffer))
+  ;; set shell environment ,if prog-mode is python-mode,the EMACS SHELL variable is SHELL
+  ;; else if prog-mode is not python-mode,The EMACS SHELL variable is eshell
+  ;; because eshell cannot parse python virtualenv command
+  ;; (defun dynamic-set-emacs-shell-environment-python-mode ()
+  ;;      (setenv "EMACS_SHELL" (getenv "SHELL")))
+  ;; (defun dynamic-set-emacs-shell-environment-other-mode ()
+  ;;   (setenv "EMACS_SHELL" "eshell"))
   ;;change powerline-default-separator to nil(what i prefer )
-  (setq powerline-default-separator 'nil)
+  (setq powerline-default-separator 'nil))
   ;; Transparency by default
-  (set-frame-parameter (selected-frame) 'alpha
-                       (cons dotspacemacs-active-transparency
-                             dotspacemacs-inactive-transparency))
+  ;; (set-frame-parameter (selected-frame) 'alpha
+  ;;                      (cons dotspacemacs-active-transparency
+  ;;                            dotspacemacs-inactive-transparency))
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -318,21 +371,33 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
+ '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
- '(custom-enabled-themes (quote (monokai)))
+ '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
-    ("a800120841da457aa2f86b98fb9fd8df8ba682cebde033d7dbf8077c1b7d677a" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "da15b6c37879302bc0d751e1f53db16d0f610df612f0b1edc1ec514dddb1ba23" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
+    ("0e219d63550634bc5b0c214aced55eb9528640377daf486e13fb18a32bf39856" "a800120841da457aa2f86b98fb9fd8df8ba682cebde033d7dbf8077c1b7d677a" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "da15b6c37879302bc0d751e1f53db16d0f610df612f0b1edc1ec514dddb1ba23" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
  '(evil-want-Y-yank-to-eol t)
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
    (--map
     (solarized-color-blend it "#002b36" 0.25)
     (quote
      ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
  '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   (quote
+    (("#073642" . 0)
+     ("#546E00" . 20)
+     ("#00736F" . 30)
+     ("#00629D" . 50)
+     ("#7B6000" . 60)
+     ("#8B2C02" . 70)
+     ("#93115C" . 85)
+     ("#073642" . 100))))
  '(hl-bg-colors
    (quote
     ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
@@ -340,6 +405,7 @@ you should place your code here."
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(hl-sexp-background-color "#efebe9")
+ '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
@@ -347,11 +413,16 @@ you should place your code here."
    (quote
     (zeal-at-point yapfify yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify wakatime-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spaceline powerline smeargle slim-mode shell-pop selectric-mode scss-mode sass-mode restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-present org org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode linum-relative link-hint less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache ht flycheck-pos-tip flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump diminish define-word cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company-anaconda company column-enforce-mode coffee-mode clean-aindent-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build spacemacs-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
  '(safe-local-variable-values (quote ((no-byte-compile t))))
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
  '(vc-annotate-background-mode nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
  '(xterm-color-names
    ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
  '(xterm-color-names-bright
