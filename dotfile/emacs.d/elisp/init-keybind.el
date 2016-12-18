@@ -19,8 +19,15 @@
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
 
+;; dynamically change indent from 4 to 2 ,or from 2 to 4
+(global-set-key (kbd "C-c t i") 'my-toggle-web-indent)
+
 (with-eval-after-load 'dired-mode
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+;; open my init.el file
+(global-set-key (kbd "<f1>") 'open-my-file)
+(global-set-key (kbd "M-s o") 'occur-dwim) 
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 
 (provide 'init-keybind)

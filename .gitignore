@@ -1,5 +1,5 @@
 node_modules/
 elpa/*
-auto-save-list/*
+emacs.d/auto-save-list/*
 recentf
 elpa
