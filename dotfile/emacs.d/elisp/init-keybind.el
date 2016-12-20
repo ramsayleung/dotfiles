@@ -26,8 +26,13 @@
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 ;; open my init.el file
 (global-set-key (kbd "<f1>") 'open-my-file)
-(global-set-key (kbd "M-s o") 'occur-dwim) 
+(global-set-key (kbd "M-s o") 'occur-dwim)
+(global-set-key (kbd "M-s e") 'iedit-mode)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;; r refer to remember
+(global-set-key (kbd "C-c r") 'org-capture-templates)
+
+(global-set-key (kbd "C-c p s") 'helm-do-ag-project-root)
 
 (provide 'init-keybind)

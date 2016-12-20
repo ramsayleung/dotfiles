@@ -1,12 +1,23 @@
+
+;;; Code:
+;;; Commentary:
+;;; package --- Summary:
+
+
 (package-initialize)
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
 
-(defvar my/packages '(
+(defvar my/packages '(;;org
+		      org-pomodoro
 		      ;; --- Auto-completion ---
 		      company
+		      ;; --syntax checker
+		      flycheck 
+		      ;; --search
+		      helm-ag
 		      ;; --- Better Editor ---
 		      hungry-delete
 		      swiper
@@ -27,7 +38,8 @@
 		      monokai-theme
 		      zenburn-theme
 		      ;; solarized-theme
-		      ) "Default packages")
+		      ) "Default package")
+
 
 (setq package-selected-packages my/packages)
 
@@ -41,6 +53,7 @@
   (package-refresh-contents)
   (dolist (pkg my/packages)
     (when (not (package-installed-p pkg))
+      (message "package name:%s" pkg)
       (package-install pkg))))
 
 (require 'popwin)
@@ -84,4 +97,8 @@
 
 (add-hook 'js2-mode-hook 'js2-refactor-mode)
 (js2r-add-keybindings-with-prefix "C-c C-m")
+(global-flycheck-mode)
+
+(yas-reload-all) 
+(add-hook 'prog-mode-hook #'yas-minor-mode)
 (provide 'init-packages)

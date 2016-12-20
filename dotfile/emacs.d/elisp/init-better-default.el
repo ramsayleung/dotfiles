@@ -57,7 +57,7 @@
 (setq dired-recursive-copies 'alway)
 (setq dired-recursive-deletes 'alway)
 
-(put 'dired-find-alternate-file 'disable nil)
+
 
 (require 'dired-x)
 
@@ -96,4 +96,8 @@
 	      (regexp-quote sym))))
 	regexp-history)
   (call-interactively 'occur))
+(set-language-environment "UTF-8")
+
+(put 'dired-find-alternate-file 'disabled nil)
+
 (provide 'init-better-default)
