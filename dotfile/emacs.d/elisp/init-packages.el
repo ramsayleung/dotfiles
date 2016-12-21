@@ -3,15 +3,28 @@
 ;;; Commentary:
 ;;; package --- Summary:
 
+;;require future
+(require 'popwin)
 
 (package-initialize)
+;;(when (>= emacs-major-version 24)
+;;  (require 'package)
+;;  (package-initialize)
+;;  (add-to-list 'package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+;;				   ("melpa" . "http://elpa.emacs-china.org/melpa/")) t))
 (when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+			   ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+  )
 
 (defvar my/packages '(;;org
 		      org-pomodoro
+		      ;; ---  evil --- 
+		      evil
+		      evil-leader
+		      evil-surround
+		      evil-nerd-commenter
+		      powerline-evil
 		      ;; --- Auto-completion ---
 		      company
 		      ;; --syntax checker
@@ -19,12 +32,15 @@
 		      ;; --search
 		      helm-ag
 		      ;; --- Better Editor ---
+		      window-numbering
 		      hungry-delete
 		      swiper
 		      counsel
 		      smartparens
 		      expand-region
 		      iedit
+		      which-key
+		      dired+
 		      ;; --- Major Mode ---
 		      js2-mode
 		      web-mode
@@ -37,12 +53,15 @@
 		      ;; --- Themes ---
 		      monokai-theme
 		      zenburn-theme
+		      dracula-theme
+		      molokai-theme
 		      ;; solarized-theme
 		      ) "Default package")
 
 
 (setq package-selected-packages my/packages)
 
+;; function module
 (defun my/packages-installed-p ()
   (loop for pkg in my/packages
 	when (not (package-installed-p pkg)) do (return nil)
@@ -56,20 +75,7 @@
       (message "package name:%s" pkg)
       (package-install pkg))))
 
-(require 'popwin)
-(popwin-mode t)
-;;(add-hook 'prog-mode' 'smartparens-mode)
-(smartparens-global-mode t)
-(sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
-;; code auto-completion
-(global-company-mode 1)
 
-;; config js2-mode for js files
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode)
-	 ("\\.html\\'" . web-mode))
-       auto-mode-alist))
 
 ;; config for web-mode
 (defun my-web-mode-indent-setup()
@@ -77,7 +83,6 @@
   (setq web-mode-css-indent-offset 2)	 ;web-mode,css in html file
   (setq web-mode-code-indent-offset 2)	 ;web-mode ,js code in html files
   )
-(add-hook 'web-mode-hook 'my-web-mode-indent-setup)
 
 (defun my-toggle-web-indent ()
   (interactive)
@@ -95,10 +100,34 @@
       (setq css-indent-offset (if (= css-indent-offset 2)  4 2)))
   (setq indent-tabs-mode nil))
 
-(add-hook 'js2-mode-hook 'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c C-m")
-(global-flycheck-mode)
-
-(yas-reload-all) 
+;; add-hook module
 (add-hook 'prog-mode-hook #'yas-minor-mode)
+(add-hook 'web-mode-hook 'my-web-mode-indent-setup)
+(add-hook 'js2-mode-hook 'js2-refactor-mode)
+
+;;global enable mode module
+(global-flycheck-mode)
+(smartparens-global-mode t)
+(global-company-mode 1)
+
+;;enable mode module
+(window-numbering-mode 1) 
+(popwin-mode t)
+(which-key-mode t)   
+(diredp-toggle-find-file-reuse-dir t)
+
+;;misc module
+;; config js2-mode for js files
+(setq auto-mode-alist
+      (append
+       '(("\\.js\\'" . js2-mode)
+	 ("\\.html\\'" . web-mode))
+       auto-mode-alist))
+
+;; show single quote "'" in emacs and lisp-interaction-mode instead of single quote pair "''"
+(sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
+
+;; reload all snippet and rebuild yasippet menu
+;;(yas-reload-all) 
 (provide 'init-packages)
+;;; init-packages ends here

@@ -11,8 +11,9 @@
 ;; highlight current line 
 (global-hl-line-mode t)
 
-(load-theme 'zenburn t)
-
+;;(load-theme 'zenburn t)
+;;(load-theme 'dracula t)
+(load-theme 'monokai t) 
 ;; make emacs full-screen at startup
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 (setq-default cursor-type 'bar)

@@ -1,3 +1,6 @@
+;;; package --- Summary
+;;; code:
+;;; Commentary:
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
@@ -12,6 +15,8 @@
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
 (ivy-mode 1)
+
+(evil-mode 1)
 
 (setq ivy-use-virtual-buffers t)
 
@@ -69,17 +74,18 @@
 ;;	(t (save-excursion
 ;;	     (ignore-errors (backward-up-list))
 ;;	     (funcall fn)))))
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-	(t (save-excursion
-	     (ignore-errors (backward-up-list))
-	     (funcall fn)))))
+;;(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+;;  "Highlight enclosing parens."
+;;  (cond ((looking-at-p "\\s(") (funcall fn))
+;;	(t (save-excursion
+;;	     (ignore-errors (backward-up-list))
+;;	     (funcall fn)))))
 ;; remove windows end of line identiter
 (defun remove-dos-eol ()
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t)(replace-match "")))
+
 
 
 ;; dwim=do what i mean
@@ -101,3 +107,4 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 (provide 'init-better-default)
+;;; init-better-default.el ends here
