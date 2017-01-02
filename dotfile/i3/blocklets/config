@@ -1,0 +1,97 @@
+separator_block_width=10
+
+[volume]
+#label=♪
+label=:
+command=~/scripts/i3/i3blocks/volume.sh
+color=#1793D1
+interval=once
+signal=10
+
+[weather label]
+color=#d11793
+full_text=  :
+#full_text=☂ฺ ☀ฺ Weather ☂ฺ ☀ฺ
+separator=false
+
+[weather]
+#command=~/weather.sh "ASI|CN|CH024|SHANGHAI"
+command=~/scripts/i3/i3blocks/iconweather.sh "ASI|CN|CH024|SHANGHAI"
+interval=1800
+color=#d11793
+separator=true
+
+#[root label]
+#color=#d15517
+#full_text= /:
+#full_text=☂ฺ ☀ฺ Weather ☂ฺ ☀ฺ
+#separator=false
+
+#[root]
+#command=df -h | grep /dev/sda2 | awk '{print $3,$2,$5}'
+#command=/home/derrick/scripts/i3/i3blocks/memory
+#color=#d15517
+#interval=30
+
+[cpu]
+label= CPU:
+#command=/home/derrick/scripts/i3/i3blocks/cpu
+command=top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
+color=#d15517
+interval=10
+
+[Memory label]
+color=#17d155
+full_text=:
+#full_text=☂ฺ ☀ฺ Weather ☂ฺ ☀ฺ
+separator=false
+
+[Memory]
+#label=:
+command=/home/derrick/scripts/i3/i3blocks/new.sh
+color=#17d155
+#separator=false
+interval=30
+
+#[disk-home]
+#command=/home/derrick/scripts/i3/i3blocks/disk $HOME
+#color=#17d155
+#interval=30
+
+#[wireless]
+#command=/usr/libexec/i3blocks/network wlan0 W
+#color=#00FF00
+#interval=10
+
+[ethernet]
+#label=:
+command=/home/derrick/scripts/i3/i3blocks/network enp2s0 E
+color=#1793D1
+interval=10
+
+[download]
+label=:
+command=~/scripts/i3/i3blocks/bandwidth.sh rx
+min_width=0000 kB/s
+align=left
+color=#17d155
+interval=1 # IMPORTANT
+separator=false
+
+[upload]
+label=:
+command=~/scripts/i3/i3blocks/bandwidth.sh tx
+min_width=0000 kB/s
+align=left
+color=#d15517
+interval=1 # IMPORTANT
+
+#[battery]
+#command=/usr/libexec/i3blocks/battery BAT0
+#interval=30
+
+[time]
+label=:
+command=date '+%a %b %d, %Y %H:%M'
+color=#FFFFFF
+interval=5

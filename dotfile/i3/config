@@ -1,0 +1,203 @@
+set $mod Mod4
+
+# Background
+exec_always feh --bg-scale /home/samray/Pictures/wallpaper/back_to_sea_hd.2.jpg
+
+# Wifi applet
+exec --no-startup-id nm-applet
+
+# Floating window
+for_window [window_role="pop-up"]		floating enable
+for_window [window_role="bubble"]		floating enable
+for_window [window_role="task_dialog"]		floating enable
+for_window [window_role="dialog"]		floating enable
+for_window [window_role="menu"]			floating enable
+for_window [class="Thunar"]			floating enable
+for_window [class="Vlc"]			floating enable
+for_window [class="wolf3d"]			floating enable
+floating_modifier $mod
+
+# lock
+# bindsym crtl+alt+l exec i3lock -i ~/Pictures/wallpaper/screen.png
+bindsym $mod+p exec i3lock -i ~/Pictures/wallpaper/screen.png
+
+# Font
+# font pango:System San Francisco Display 11
+font pango:System San Francisco Display 11
+
+# Gaps
+for_window [class="^.*"] border pixel 3
+# gaps inner 10
+# gaps outer 5
+new_window normal
+
+# Animations
+exec_always --no-startup-id compton --config /home/samray/.compton
+
+# Remove mouse focus
+focus_follows_mouse none
+
+# Dunst
+exec --no-startup-id dunst -config ~/.dunstrc
+
+# Rofi
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# Keyboard shortcuts
+# bindsym $mod+Return exec termite
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+q kill
+
+# Move focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split
+# bindsym $mod+h split h
+# bindsym $mod+v split v
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Change layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tilling or floating
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# Workspaces - names
+
+set $workspace1 "1. "
+set $workspace2 "2. "
+set $workspace3 "3. "
+set $workspace4 "4. "
+set $workspace5 "5. "
+set $workspace6 "6. "
+set $workspace7 "7. "
+set $workspace8 "8. "
+
+# Workspaces - switch
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace $workspace10
+
+# Move window to designated workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# Assigned workspaces
+assign [class="Emacs"] workspace $workspace2
+assign [class="Chromium"] workspace $workspace3
+assign [class="GitKraken"] workspace $workspace4
+assign [class="Vlc"] workspace $workspace6
+# assign [class="Google Play Music Desktop Player"] workspace $workspace10
+assign [class="shadowsocks-qt5"] workspace $workspace7
+assign [class="netease-cloud-music"] workspace $workspace8
+
+# Reload config file / restart i3 / exit i3
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Resize mode
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # Back to default
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Colors and sheit
+set $bg-color			#37474F
+set $inactive-bg		#37474F
+set $text-color			#F3F4F5
+set $inactive-text		#676E7D
+set $urgent-bg			#E53935
+set $indicator			#37474F
+
+#			border		bg		text		indicator
+client.focused		$bg-color	$bg-color	$text-color	$indicator
+client.unfocused	$inactive-bg	$inactive-bg	$inactive-text	$indicator
+client.focused_inactive	$inactive-bg	$inactive-bg	$inactive-text	$indicator
+client.urgent		$urgent-bg	$urgent-bg	$text-color	$indicator
+
+bar {
+        position top
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+        # status_command i3blocks 
+	colors {
+	       background	$bg-color
+	       separator	#757575
+	       focused_workspace	$bg-color	$bg-color	$text-color
+	       inactive_workspace	$inactive-bg	$inactive-bg	$inactive-text
+	       urgent_workspace		$urgent-bg	$urgent-bg	$text-color
+	}
+}
+# startup
+exec ss-qt5 
+exec_always fcitx 
+exec yakuake 
+exec  xautolock -time 15 -locker "i3lock -i ~/Pictures/wallpaper/screen.png"
+# Keys
+exec_always xmodmap -e "clear lock" #disable caps lock switch
+exec_always xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
+
+# key-bindings
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 2 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 2 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 2 toggle # mute sound
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# assign applications to workspace

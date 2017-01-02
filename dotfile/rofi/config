@@ -1,0 +1,65 @@
+rofi.location:          0
+rofi.color-enabled:     true
+!                       'background', 'border'
+rofi.color-window:      argb:dc111111, argb:dc111111
+! State:                'bg',          'fg',   'bgalt',       'hlbg',        'hlfg'
+rofi.color-normal:      argb:00333333, #ffffff, argb:00333333, argb:00333333, argb:ff00BCD4
+rofi.color-urgent:      argb:00333333, #ffffff, argb:00333333, argb:00333333, argb:ff00BCD4
+rofi.color-active:      argb:00333333, #ffffff, argb:00333333, argb:00333333, argb:ff00BCD4
+rofi.separator-style:   solid
+rofi.fullscreen:        true
+rofi.padding:           130
+rofi.hide-scrollbar:    true
+rofi.line-margin:       5
+rofi.fake-transparency: false
+rofi.yoffset:           0
+rofi.xoffset:           0
+rofi.width:             1366
+rofi.opacity:           90
+rofi.font:              roboto-Thin 12
+
+
+*cursorColor:                         #FFFF00
+*colorIT:                             #E3AB8D
+*colorBD:                             #F0E5DF
+*colorUL:                             #E91E63
+*VT100.colorBDMode:                   true
+*VT100.colorBD:                       #F44336
+*VT100.colorULMode:                   true
+*VT100.colorUL:                       #F06292
+*VT100.veryBoldColors:                6
+
+
+*foreground:                          #FFFFFF
+*background:                          #000000
+
+! Black                               Black !
+*color0:                              #4E4E4E
+*color8:                              #626262
+! Red                                 Red   !
+*color1:                              #F44336
+*color9:                              #D32F2F
+! Green                               Green !
+*color2:                              #388E3C
+*color10:                             #4CAF50
+! Yellow                              Yellow!
+*color3:                              #FFC107
+*color11:                             #FFD54F
+! Blue                                Blue  !
+*color4:                              #009688
+*color12:                             #4DB6AC
+! Magenta                             Magenta
+*color5:                              #F06292
+*color13:                             #E91E63
+! Cyan                                Cyan  !
+*color6:                              #00BCD4
+*color14:                             #4DD0E1
+! White                               White !
+*color7:                              #D0D0D0
+*color15:                             #DFFFFF
+
+*xterm*faceName: SourceCodeProForPowerline-Regular:size=10:antialias=true
+
+xterm*VT100.Translations: #override \
+                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
