@@ -1,7 +1,8 @@
 set $mod Mod4
 
 # Background
-exec_always feh --bg-scale /home/samray/Pictures/wallpaper/back_to_sea_hd.2.jpg
+# exec_always feh --bg-scale /home/samray/Pictures/wallpaper/back_to_sea_hd.2.jpg
+exec_always feh --bg-scale /home/samray/Pictures/wallpaper/UfntLlJ.jpg
 
 # Wifi applet
 exec --no-startup-id nm-applet
@@ -12,7 +13,8 @@ for_window [window_role="bubble"]		floating enable
 for_window [window_role="task_dialog"]		floating enable
 for_window [window_role="dialog"]		floating enable
 for_window [window_role="menu"]			floating enable
-for_window [class="Thunar"]			floating enable
+# for_window [class="Thunar"]			floating enable;
+for_window [class="File-roller"] floating enable;
 for_window [class="Vlc"]			floating enable
 for_window [class="wolf3d"]			floating enable
 floating_modifier $mod
@@ -27,8 +29,8 @@ font pango:System San Francisco Display 11
 
 # Gaps
 for_window [class="^.*"] border pixel 3
-# gaps inner 10
-# gaps outer 5
+gaps inner 5
+gaps outer 3
 new_window normal
 
 # Animations
@@ -53,10 +55,11 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# disable Arroy key,force to vim keybinding
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
 
 # Move window
 bindsym $mod+Shift+h move left
@@ -69,8 +72,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # Split
-# bindsym $mod+h split h
-# bindsym $mod+v split v
+bindsym $mod+o split h
+bindsym $mod+v split v
 
 # Fullscreen
 bindsym $mod+f fullscreen toggle
@@ -87,14 +90,14 @@ bindsym $mod+a focus parent
 
 # Workspaces - names
 
-set $workspace1 "1. "
-set $workspace2 "2. "
+set $workspace1 "1. "
+set $workspace2 "2. "
 set $workspace3 "3. "
 set $workspace4 "4. "
 set $workspace5 "5. "
 set $workspace6 "6. "
 set $workspace7 "7. "
-set $workspace8 "8. "
+set $workspace8 "8. "
 
 # Workspaces - switch
 bindsym $mod+1 workspace $workspace1
@@ -121,8 +124,9 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # Assigned workspaces
-assign [class="Emacs"] workspace $workspace2
-assign [class="Chromium"] workspace $workspace3
+# assign [class="Emacs"] workspace $workspace1
+assign [class="Firefox"] workspace $workspace2
+assign [class="google-chrome"] workspace $workspace3
 assign [class="GitKraken"] workspace $workspace4
 assign [class="Vlc"] workspace $workspace6
 # assign [class="Google Play Music Desktop Player"] workspace $workspace10
@@ -153,18 +157,20 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Colors and sheit
-set $bg-color			#37474F
+set $bg-color			#2E3440
 set $inactive-bg		#37474F
 set $text-color			#F3F4F5
-set $inactive-text		#676E7D
-set $urgent-bg			#E53935
-set $indicator			#37474F
+set $inactive-text		#2E3440
+set $light_accent   #c06c84
+set $dark_base      #2E3440
+set $dark_accent    #6c5b7b
 
-#			border		bg		text		indicator
-client.focused		$bg-color	$bg-color	$text-color	$indicator
-client.unfocused	$inactive-bg	$inactive-bg	$inactive-text	$indicator
-client.focused_inactive	$inactive-bg	$inactive-bg	$inactive-text	$indicator
-client.urgent		$urgent-bg	$urgent-bg	$text-color	$indicator
+# class                   border           backgr.           text             indicator         child_border
+client.focused		        $light_accent	   $light_accent     #ffffff	        $light_accent     $light_accent
+client.focused_inactive   $dark_base       $dark_base        #ffffff     $dark_base        $dark_accent
+client.unfocused          $dark_base       $dark_base        #888888     $dark_base        $dark_accent
+client.urgent             #2f343a          $dark_base        #ffffff     $dark_accent      $light_accent
+client.placeholder        #000000          $dark_base        #ffffff     #000000           $light_accent
 
 bar {
         position top
@@ -181,7 +187,8 @@ bar {
 # startup
 exec ss-qt5 
 exec_always fcitx 
-exec yakuake 
+exec guake 
+exec emacs --debug-init
 exec  xautolock -time 15 -locker "i3lock -i ~/Pictures/wallpaper/screen.png"
 # Keys
 exec_always xmodmap -e "clear lock" #disable caps lock switch
