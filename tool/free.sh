@@ -4,7 +4,8 @@
 #Program:
 # emptying the buffers cache 
 
-sudo -s <<EOF
+function reduce(){
+    sudo -s <<EOF
 free
 echo "start to sync"
 sync
@@ -13,4 +14,4 @@ echo "start to empty cache"
 echo "flush cache done"
 free
 EOF
-
+}
