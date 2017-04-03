@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Code from https://github.com/uglide/RedisDesktopManager
 # $RDM_DIR should be defined
-
+set -ex
 # RDM Functions
 # ================
 

@@ -23,6 +23,15 @@ if [ "$(uname)" == "Darwin" ]; then
 
     echo "install fasd"
     brew install fasd
+
+    echo "install tree"
+    brew install tree
+
+    echo "install shellcheck"
+    brew install shellcheck
+
+    echo "install guile"
+    brew install guile
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Do something under GNU/Linux platform
     GetOSVersion
@@ -43,6 +52,12 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo apt-get install emacs -y
 	# install vim
 	sudo apt-get install vim -y
+	# install tree
+	sudo apt-get install tree -y
+	# install shellcheck
+	sudo apt-get install shellcheck -y
+	# install guile (scheme compiler)
+	sudo apt-get install guile -y
 
     elif [  "$os_VENDOR" == "Fedora" ] || [[ "$os_VENDOR" == "CentOS" ]] || [[ "$os_VENDOR" == "Korora" ]]; then
 	# install ag
@@ -61,6 +76,37 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo yum install -y emacs
 	# install i3
 	sudo yum install -y i3
+	# install tree
+	sudo yum install -y tree
+	# install shellcheck
+	sudo yum install ShellCheck -y
+	# install guile
+	sudo yum install guile -y
+
+
+    elif [  "$os_VENDOR" == "Arch" ] ; then
+	# install ag
+	sudo pacman -S -y the_silver_searcher
+	# install zeal
+	sudo pacman -S -y zeal
+	# install httpie
+	sudo pacman -S -y httpie
+	# install htop 
+	sudo pacman -S -y htop
+	# install ncdu
+	sudo pacman -S -y ncdu
+	# install vim
+	sudo pacman -S -y vim
+	# install emacs
+	sudo pacman -S -y emacs
+	# install i3
+	sudo pacman -S -y i3
+	# install tree
+	sudo pacman -S -y tree
+	# install shellcheck
+	sudo pacman -S ShellCheck -y
+	# install guile
+	sudo pacman -S guile -y
     fi
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under 32 bits Windows NT platform
