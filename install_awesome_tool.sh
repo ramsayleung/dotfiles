@@ -32,6 +32,15 @@ if [ "$(uname)" == "Darwin" ]; then
 
     echo "install guile"
     brew install guile
+
+    echo "install proxychains-ng"
+    brew install proxychains-ng
+
+    echo "install pandoc"
+    brew install pandoc
+
+    echo "install markdown"
+    brew install markdown
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Do something under GNU/Linux platform
     GetOSVersion
@@ -58,6 +67,16 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo apt-get install shellcheck -y
 	# install guile (scheme compiler)
 	sudo apt-get install guile -y
+	# install source code pro font
+	[ -d /usr/share/fonts/opentype ] || sudo mkdir /usr/share/fonts/opentype
+	sudo git clone https://github.com/adobe-fonts/source-code-pro.git /usr/share/fonts/opentype/scp
+	sudo fc-cache -f -v
+	# install proxychains-ng
+	sudo apt-get install proxychains-ng -y
+	# install pandoc
+	sudo apt-get install pandoc -y
+
+	sudo apt-get install markdown -y
 
     elif [  "$os_VENDOR" == "Fedora" ] || [[ "$os_VENDOR" == "CentOS" ]] || [[ "$os_VENDOR" == "Korora" ]]; then
 	# install ag
@@ -82,6 +101,14 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo yum install ShellCheck -y
 	# install guile
 	sudo yum install guile -y
+	# install source  code pro font
+	sudo yum install adobe-source-code-pro-fonts -y
+	# install proxychains-ng
+	sudo yum install proxychains-ng -y
+
+	sudo yum install pandoc -y
+
+	sudo yum install markdown -y
 
 
     elif [  "$os_VENDOR" == "Arch" ] ; then
@@ -107,6 +134,16 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo pacman -S ShellCheck -y
 	# install guile
 	sudo pacman -S guile -y
+	# install source-code-pro font
+	sudo pacman -S adobe-source-code-pro-fonts -y
+	# install proxychains-ng
+	sudo pacman -S proxychains-ng -y
+
+	sudo pacman -S pandoc -y
+
+	sudo pacman -S markdown -y
+
+	sudo pacman -S ripgrep 
     fi
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under 32 bits Windows NT platform

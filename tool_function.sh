@@ -30,6 +30,16 @@ function muse(){
     du -chs * | sort -rh | head -11
 }
 
+# select git commit
+function sgc(){
+    git log --pretty=oneline |percol|cut -d " " -f 1
+}
+
+# select git branch
+function sgb(){
+    git branch | percol
+}
+
 #Help you quickly config public/private key for ssh login
 #generate public/private rsa key pair,and then ssh login remote server with public/private key
 #,hence we could login quickly without enter password each times

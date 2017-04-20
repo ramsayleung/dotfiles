@@ -9,14 +9,9 @@
 (defun open-my-file()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-(require 'hungry-delete)
-;; delete spaces at once
-(global-hungry-delete-mode t)
+
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
-(ivy-mode 1)
-
-(evil-mode 1)
 
 (setq ivy-use-virtual-buffers t)
 
@@ -26,22 +21,6 @@
 					    ;; signature
 					    ("8sa" "samray")
  					    ))
-;; auto indent file before save file
-(defun indent-buffer()
-  (interactive)
-  (indent-region (point-min)(point-max)))
-
-(defun indent-region-or-buffer()
-  (interactive)
-  (save-excursion
-    (if (region-active-p)
-	(progn
-	  (indent-region (region-beginning) (region-end))
-	  (message "Indented selected region"))
-      (progn
-	(indent-buffer)
-	(message "Indented buffer")))))
-(add-hook 'before-save-hook 'indent-region-or-buffer)
 
 ;; enable hippie-mode to enhance auto-completion
 
@@ -105,6 +84,47 @@
 (set-language-environment "UTF-8")
 
 (put 'dired-find-alternate-file 'disabled nil)
+
+;;; Changing Ediff options
+;;; use window instead of weird frame
+(require 'ediff)
+(csetq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;;; changing ediff key binding
+(defun samray/ediff-hook ()
+  (ediff-setup-keymap)
+  (define-key ediff-mode-map "j" 'ediff-next-difference)
+  (define-key ediff-mode-map "k" 'ediff-previous-difference))
+
+(add-hook 'ediff-mode-hook 'samray/ediff-hook)
+
+;;; when quit an Ediff session, it just leaves the two diff windows around,
+;;; instead of restoring the window configuration from when Ediff was started
+(winner-mode)
+(add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+
+;; -*- lexical-binding: t -*-
+(defun samray/ediff-files ()
+  "Ediff in 'dired-mode'."
+  (interactive)
+  (let ((files (dired-get-marked-files))
+        (wnd (current-window-configuration)))
+    (if (<= (length files) 2)
+        (let ((file1 (car files))
+              (file2 (if (cdr files)
+                         (cadr files)
+                       (read-file-name
+                        "file: "
+                        (dired-dwim-target-directory)))))
+          (if (file-newer-than-file-p file1 file2)
+              (ediff-files file2 file1)
+            (ediff-files file1 file2))
+          (add-hook 'ediff-after-quit-hook-internal
+                    (lambda ()
+                      (setq ediff-after-quit-hook-internal nil)
+                      (set-window-configuration wnd))))
+      (error "No more than 2 files should be marked"))))
+
 
 (provide 'init-better-default)
 ;;; init-better-default.el ends here
