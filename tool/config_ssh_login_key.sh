@@ -3,10 +3,11 @@
 #Help you quickly config public/private key for ssh login
 #generate public/private rsa key pair,and then ssh login remote server with public/private key
 #,hence we could login quickly without enter password each times
-set -e
-set -x
+set -e				# Exit immediately if a command return non-zero
+				# status
+set -x 				# Print a trace of simple commands
 function config_ssh_login_key(){
-    if [ $# -lt 4 ];then
+    if [ $# -lt 3 ];then
 	echo "Usage: $(basename $0) -u user -h hostname -p port"
 	exit
     fi

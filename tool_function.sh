@@ -22,9 +22,22 @@ function pwdf()
 {
     local current_dir=$(pwd)
     local copied_file=$(find $current_dir -type f -print |percol)
-    echo -n $copied_file |pclip;
+    echo -n "$copied_file" |pclip;
 }
-
+# generate key
+function gkey(){
+    if [ -n "$1" ];then
+	local length="$1"
+    else
+	local length=32
+    fi
+    OS_NAME=$(uname)
+    if [ $OS_NAME = "Darwin" ]; then
+	LC_CTYPE=C cat /dev/urandom |tr -cd "[:alnum:]"|head -c "$length";echo
+    else
+	cat /dev/urandom |tr -cd "[:alnum:]"|head -c "$length";echo
+    fi
+}
 #check the disk usage,combine du and sort
 function muse(){
     du -chs * | sort -rh | head -11
@@ -45,9 +58,9 @@ function sgb(){
 #,hence we could login quickly without enter password each times
 
 function config_ssh_login_key(){
-    if [ $# -lt 4 ];then
-	echo "Usage: $( basename $0 ) -u user -h hostname -p port"
-	exit
+    if [ $# -lt 3 ];then
+	echo "Usage: $(basename $0) -u user -h hostname -p port"
+	kill -INT $$
     fi
     #if public/private key doesn't exist ,generate public/private key 
     if [ -f ~/.ssh/id_rsa ];then
@@ -70,14 +83,15 @@ function config_ssh_login_key(){
     fi
     #check whether it is the first time to run this script and whether authorized_keys exists
     # ssh_host_and_user="$1@$2"
-    authorized_keys="~/.ssh/authorized_keys"
-    read -s -p "$user@$hostname's password:" password
-    if sshpass -p $password  ssh -p $port $user@$hostname test -e $authorized_keys;then
+    authorized_keys="$HOME/.ssh/authorized_keys"
+    read -r -s -p "$user@$hostname's password:" password
+    if sshpass -pv $password ssh -p "$port" "$user@$hostname" test -e "$authorized_keys";then
 	echo "authorized key exists"
-	exit
+	kill -INT $$
     else
 	sshpass -p $password ssh  $user@$hostname -p $port "mkdir -p ~/.ssh;chmod 0700 .ssh"
 	sshpass -p $password scp -P $port  ~/.ssh/id_rsa.pub $user@$hostname:~/.ssh/authorized_keys
+	# ssh-copy-id "$user@$hostname -p $port"
     fi
 }
 
@@ -132,8 +146,9 @@ function proxy_on(){
     echo -e "proxy is on"
 }
 function mkcd(){
-    mkdir "$1"
-    cd "$1"
+    target_dir="$1"
+    mkdir "$target_dir"
+    cd "$target_dir"
 }
 # #to enable fasd
 function enable_fasd(){
