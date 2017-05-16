@@ -44,6 +44,12 @@ if [ "$(uname)" == "Darwin" ]; then
 
     echo "install cloc"
     brew install cloc
+
+    echo "install aria2c"
+    brew install aria2c
+
+    echo "install axel"
+    brew install axel
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Do something under GNU/Linux platform
     GetOSVersion
@@ -82,6 +88,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo apt-get install markdown -y
 
 	sudo apt-get install cloc -y
+
 	sudo apt-get install i3lock -y
 
 	sudo apt-get install rofi -y
@@ -178,21 +185,22 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo pacman -S ripgrep -y
 
 	sudo pacman -S cloc  -y
-	sudo pacman -S ripgrep 
+
+	sudo pacman -Sy ripgrep 
 
 	sudo pacman -Sy i3lock
 
 	sudo pacman -Sy rofi
 
-	sudo pacman -Sy install feh 
+	sudo pacman -Sy feh 
 
-	sudo pacman -Sy install nm-applet 
+	sudo pacman -Sy network-manager-applet
 
-	sudo pacman -Sy install compton 
+	sudo pacman -Sy compton 
 
-	sudo pacman -Sy instal dunst 
+	sudo pacman -Sy dunst 
 
-	sudo pacman -Sy install i3-sensible-terminal 
+	sudo pacman -Sy i3-sensible-terminal 
     fi
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under 32 bits Windows NT platform
