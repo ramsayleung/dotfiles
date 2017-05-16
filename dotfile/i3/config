@@ -1,19 +1,21 @@
 set $mod Mod4
 
 # Background
-# exec_always feh --bg-scale /home/samray/Pictures/wallpaper/back_to_sea_hd.2.jpg
-exec_always feh --bg-scale /home/samray/Pictures/wallpaper/UfntLlJ.jpg
+exec_always feh --bg-scale /home/samray/Pictures/wallpaper/ocean.jpg
+# exec_always feh --bg-scale /home/samray/Pictures/wallpaper/UfntLlJ.jpg
 
 # Wifi applet
 exec --no-startup-id nm-applet
-
 # Floating window
 for_window [window_role="pop-up"]		floating enable
 for_window [window_role="bubble"]		floating enable
 for_window [window_role="task_dialog"]		floating enable
 for_window [window_role="dialog"]		floating enable
 for_window [window_role="menu"]			floating enable
-# for_window [class="Thunar"]			floating enable;
+for_window [window_role="GtkFileChooserDialog"]			floating enable, border normal, resize set 800 650
+for_window [window_role="Preferences"] floating enable
+
+for_window [class="Thunar"]			floating enable ;
 for_window [class="File-roller"] floating enable;
 for_window [class="Vlc"]			floating enable
 for_window [class="wolf3d"]			floating enable
@@ -24,13 +26,13 @@ floating_modifier $mod
 bindsym $mod+p exec i3lock -i ~/Pictures/wallpaper/screen.png
 
 # Font
+font pango:Source Code Pro 12
 # font pango:System San Francisco Display 11
-font pango:System San Francisco Display 11
 
 # Gaps
 for_window [class="^.*"] border pixel 3
-gaps inner 5
-gaps outer 3
+gaps inner 0
+gaps outer 0
 new_window normal
 
 # Animations
@@ -91,13 +93,14 @@ bindsym $mod+a focus parent
 # Workspaces - names
 
 set $workspace1 "1. "
-set $workspace2 "2. "
+set $workspace2 "2. "
 set $workspace3 "3. "
-set $workspace4 "4. "
-set $workspace5 "5. "
-set $workspace6 "6. "
+set $workspace4 "4. "
+set $workspace5 "5. "
+set $workspace6 "6. "
 set $workspace7 "7. "
 set $workspace8 "8. "
+set $workspace9 "9. "
 
 # Workspaces - switch
 bindsym $mod+1 workspace $workspace1
@@ -108,7 +111,7 @@ bindsym $mod+5 workspace $workspace5
 bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace 9
+bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 
 # Move window to designated workspace
@@ -120,18 +123,19 @@ bindsym $mod+Shift+5 move container to workspace $workspace5
 bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # Assigned workspaces
 # assign [class="Emacs"] workspace $workspace1
 assign [class="Firefox"] workspace $workspace2
 assign [class="google-chrome"] workspace $workspace3
-assign [class="GitKraken"] workspace $workspace4
-assign [class="Vlc"] workspace $workspace6
-# assign [class="Google Play Music Desktop Player"] workspace $workspace10
+# assign [class="jetbrains-idea"] workspace $workspace4
+assign [class="VirtualBox"] workspace $workspace5
+assign [class="urxvt"] workspace $workspace6
 assign [class="shadowsocks-qt5"] workspace $workspace7
 assign [class="netease-cloud-music"] workspace $workspace8
+assign [class="jetbrains-datagrip"] workspace $workspace9
 
 # Reload config file / restart i3 / exit i3
 bindsym $mod+Shift+c reload
@@ -140,19 +144,19 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Resize mode
 mode "resize" {
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+bindsym j resize shrink width 10 px or 10 ppt
+bindsym k resize grow height 10 px or 10 ppt
+bindsym l resize shrink height 10 px or 10 ppt
+bindsym semicolon resize grow width 10 px or 10 ppt
 
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+bindsym Left resize shrink width 10 px or 10 ppt
+bindsym Down resize grow height 10 px or 10 ppt
+bindsym Up resize shrink height 10 px or 10 ppt
+bindsym Right resize grow width 10 px or 10 ppt
 
-        # Back to default
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+# Back to default
+bindsym Return mode "default"
+bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
@@ -161,7 +165,7 @@ set $bg-color			#2E3440
 set $inactive-bg		#37474F
 set $text-color			#F3F4F5
 set $inactive-text		#2E3440
-set $light_accent   #c06c84
+set $light_accent   #00bfff
 set $dark_base      #2E3440
 set $dark_accent    #6c5b7b
 
@@ -169,20 +173,18 @@ set $dark_accent    #6c5b7b
 client.focused		        $light_accent	   $light_accent     #ffffff	        $light_accent     $light_accent
 client.focused_inactive   $dark_base       $dark_base        #ffffff     $dark_base        $dark_accent
 client.unfocused          $dark_base       $dark_base        #888888     $dark_base        $dark_accent
-client.urgent             #2f343a          $dark_base        #ffffff     $dark_accent      $light_accent
-client.placeholder        #000000          $dark_base        #ffffff     #000000           $light_accent
 
 bar {
-        position top
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
-        # status_command i3blocks 
-	colors {
-	       background	$bg-color
-	       separator	#757575
-	       focused_workspace	$bg-color	$bg-color	$text-color
-	       inactive_workspace	$inactive-bg	$inactive-bg	$inactive-text
-	       urgent_workspace		$urgent-bg	$urgent-bg	$text-color
-	}
+position top
+status_command i3blocks -c ~/.config/i3/i3blocks.conf
+# status_command i3blocks 
+colors {
+background	$bg-color
+separator	#757575
+focused_workspace	$bg-color	$bg-color	$text-color
+inactive_workspace	$inactive-bg	$inactive-bg	$inactive-text
+urgent_workspace		$urgent-bg	$urgent-bg	$text-color
+}
 }
 # startup
 exec ss-qt5 
@@ -208,3 +210,5 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # assign applications to workspace
+
+exec xrandr --output HDMI1 --mode 1920x1080 --pos 1366x0 --rotate normal --output VIRTUAL1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output VGA1 --off

@@ -82,6 +82,19 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo apt-get install markdown -y
 
 	sudo apt-get install cloc -y
+	sudo apt-get install i3lock -y
+
+	sudo apt-get install rofi -y
+
+	sudo apt-get install feh -y
+
+	sudo apt-get install nm-applet -y
+
+	sudo apt-get install compton -y
+
+	sudo apt-get instal dunst -y
+
+	sudo apt-get install i3-sensible-terminal -y
     elif [  "$os_VENDOR" == "Fedora" ] || [[ "$os_VENDOR" == "CentOS" ]] || [[ "$os_VENDOR" == "Korora" ]]; then
 	# install ag
 	sudo yum install -y the_silver_searcher
@@ -116,6 +129,20 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 
 	# count line and space in code
 	sudo yum install cloc  -y
+
+	sudo yum install i3lock -y
+
+	sudo yum install rofi -y
+
+	sudo yum install feh -y
+
+	sudo yum install nm-applet -y
+
+	sudo yum install compton -y
+
+	sudo yum instal dunst -y
+
+	sudo yum install i3-sensible-terminal -y
     elif [  "$os_VENDOR" == "Arch" ] ; then
 	# install ag
 	sudo pacman -S -y the_silver_searcher
@@ -151,6 +178,21 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	sudo pacman -S ripgrep -y
 
 	sudo pacman -S cloc  -y
+	sudo pacman -S ripgrep 
+
+	sudo pacman -Sy i3lock
+
+	sudo pacman -Sy rofi
+
+	sudo pacman -Sy install feh 
+
+	sudo pacman -Sy install nm-applet 
+
+	sudo pacman -Sy install compton 
+
+	sudo pacman -Sy instal dunst 
+
+	sudo pacman -Sy install i3-sensible-terminal 
     fi
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under 32 bits Windows NT platform
