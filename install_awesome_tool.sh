@@ -41,6 +41,9 @@ if [ "$(uname)" == "Darwin" ]; then
 
     echo "install markdown"
     brew install markdown
+
+    echo "install cloc"
+    brew install cloc
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Do something under GNU/Linux platform
     GetOSVersion
@@ -78,6 +81,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 
 	sudo apt-get install markdown -y
 
+	sudo apt-get install cloc -y
     elif [  "$os_VENDOR" == "Fedora" ] || [[ "$os_VENDOR" == "CentOS" ]] || [[ "$os_VENDOR" == "Korora" ]]; then
 	# install ag
 	sudo yum install -y the_silver_searcher
@@ -110,7 +114,8 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 
 	sudo yum install markdown -y
 
-
+	# count line and space in code
+	sudo yum install cloc  -y
     elif [  "$os_VENDOR" == "Arch" ] ; then
 	# install ag
 	sudo pacman -S -y the_silver_searcher
@@ -143,7 +148,9 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 
 	sudo pacman -S markdown -y
 
-	sudo pacman -S ripgrep 
+	sudo pacman -S ripgrep -y
+
+	sudo pacman -S cloc  -y
     fi
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under 32 bits Windows NT platform

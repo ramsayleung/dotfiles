@@ -134,7 +134,7 @@ function GetOSVersion {
             os_VENDOR=""
         done
         os_PACKAGE="rpm"
-    # If lsb_release is not installed, we should be able to detect Debian OS
+	# If lsb_release is not installed, we should be able to detect Debian OS
     elif [[ -f /etc/debian_version ]] && [[ $(cat /proc/version) =~ "Debian" ]]; then
         os_VENDOR="Debian"
         os_PACKAGE="deb"
@@ -166,8 +166,8 @@ function GetDistro {
             DISTRO="sle${os_RELEASE}sp${os_UPDATE}"
         fi
     elif [[ "$os_VENDOR" =~ (Red Hat) || \
-        "$os_VENDOR" =~ (CentOS) || \
-        "$os_VENDOR" =~ (OracleLinux) ]]; then
+		"$os_VENDOR" =~ (CentOS) || \
+		"$os_VENDOR" =~ (OracleLinux) ]]; then
         # Drop the . release as we assume it's compatible
         DISTRO="rhel${os_RELEASE::1}"
     elif [[ "$os_VENDOR" =~ (XenServer) ]]; then
