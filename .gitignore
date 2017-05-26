@@ -3,3 +3,4 @@ elpa/*
 emacs.d/auto-save-list/*
 recentf
 elpa
+/dotfile/.tern-port
