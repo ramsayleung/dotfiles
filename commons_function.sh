@@ -1,12 +1,31 @@
 #!/usr/bin/env bash
-# Code from https://github.com/uglide/RedisDesktopManager
 # $RDM_DIR should be defined
-set -ex
+
 # RDM Functions
 # ================
-
+set -ex
 DEPS_DIR=$RDM_DIR/3rdparty/
 
+function build_breakpad {
+    cd $DEPS_DIR/gbreakpad/
+    git clone https://chromium.googlesource.com/linux-syscall-support src/third_party/lss || true
+    touch README
+    ./configure
+    make -s -j 2	
+}
+
+function build_libssh2 {
+    if [ ! -f /usr/local/lib/libssh2.a ]; then
+        cd $DEPS_DIR
+        git clone https://github.com/libssh2/libssh2.git libssh2 || true
+        cd libssh2
+        mkdir bin || rm -fR ./bin && mkdir bin
+        cd bin
+        cmake -DCRYPTO_BACKEND=OpenSSL -DENABLE_ZLIB_COMPRESSION=ON ..
+        cmake --build .
+        sudo make install
+    fi
+}
 
 function print_line {
     echo "===================================================================="
@@ -134,7 +153,7 @@ function GetOSVersion {
             os_VENDOR=""
         done
         os_PACKAGE="rpm"
-	# If lsb_release is not installed, we should be able to detect Debian OS
+    # If lsb_release is not installed, we should be able to detect Debian OS
     elif [[ -f /etc/debian_version ]] && [[ $(cat /proc/version) =~ "Debian" ]]; then
         os_VENDOR="Debian"
         os_PACKAGE="deb"
@@ -166,8 +185,8 @@ function GetDistro {
             DISTRO="sle${os_RELEASE}sp${os_UPDATE}"
         fi
     elif [[ "$os_VENDOR" =~ (Red Hat) || \
-		"$os_VENDOR" =~ (CentOS) || \
-		"$os_VENDOR" =~ (OracleLinux) ]]; then
+        "$os_VENDOR" =~ (CentOS) || \
+        "$os_VENDOR" =~ (OracleLinux) ]]; then
         # Drop the . release as we assume it's compatible
         DISTRO="rhel${os_RELEASE::1}"
     elif [[ "$os_VENDOR" =~ (XenServer) ]]; then
