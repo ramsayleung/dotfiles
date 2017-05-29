@@ -16,11 +16,11 @@ if [ "$(uname)" == "Darwin" ]; then
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Do something under GNU/Linux platform
     GetDistro
-    if [ "$os_VENDOR" == "Ubuntu" ] || [ "$os_VENDOR" == "Debian" ] || [ "$os_VENDOR" == "LinuxMint" ]; then
+    if type apt-get >/dev/null 2>&1; then
 	apt_get_install
-    elif [  "$os_VENDOR" == "Fedora" ] || [ "$os_VENDOR" == "CentOS" ] || [ "$os_VENDOR" == "Korora" ]; then
+    elif type yum >/dev/null 2>&1; then
 	yum_dnf_install
-    elif [  "$os_VENDOR" == "Arch" ] ; then
+    elif type pacman >/dev/null 2>&1; then
 	pacman_install
     fi
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then

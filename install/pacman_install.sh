@@ -1,55 +1,55 @@
 #!/usr/bin/env bash
-function arch_install(){
+function pacman_install(){
     # install ag
-    sudo pacman -S -y the_silver_searcher
+    sudo pacman -S --noconfirm the_silver_searcher
     # install zeal
-    sudo pacman -S -y zeal
+    sudo pacman -S --noconfirm zeal
     # install httpie
-    sudo pacman -S -y httpie
+    sudo pacman -S --noconfirm httpie
     # install htop 
-    sudo pacman -S -y htop
+    sudo pacman -S --noconfirm htop
     # install ncdu
-    sudo pacman -S -y ncdu
+    sudo pacman -S --noconfirm ncdu
     # install vim
-    sudo pacman -S -y vim
+    sudo pacman -S --noconfirm vim
     # install emacs
-    sudo pacman -S -y emacs
+    sudo pacman -S --noconfirm emacs
     # install i3
-    sudo pacman -S -y i3
+    sudo pacman -S --noconfirm i3
     # install tree
-    sudo pacman -S -y tree
+    sudo pacman -S --noconfirm tree
     # install shellcheck
-    sudo pacman -S ShellCheck -y
+    sudo pacman -S --noconfirm ShellCheck 
     # install guile
-    sudo pacman -S guile -y
+    sudo pacman -S --noconfirm guile 
     # install source-code-pro font
-    sudo pacman -S adobe-source-code-pro-fonts -y
+    sudo pacman -S --noconfirm adobe-source-code-pro-fonts 
     # install proxychains-ng
-    sudo pacman -S proxychains-ng -y
+    sudo pacman -S --noconfirm proxychains-ng 
 
-    sudo pacman -S pandoc -y
+    sudo pacman -S --noconfirm pandoc 
 
-    sudo pacman -S markdown -y
+    sudo pacman -S --noconfirm markdown
 
-    sudo pacman -S ripgrep -y
+    sudo pacman -S --noconfirm ripgrep
 
-    sudo pacman -S cloc  -y
+    sudo pacman -S --noconfirm cloc
 
-    sudo pacman -Sy ripgrep 
+    sudo pacman -S --noconfirm ripgrep 
 
-    sudo pacman -Sy i3lock
+    sudo pacman -S --noconfirm i3lock
 
-    sudo pacman -Sy rofi
+    sudo pacman -S --noconfirm rofi
 
-    sudo pacman -Sy feh 
+    sudo pacman -S --noconfirm feh 
 
-    sudo pacman -Sy compton 
+    sudo pacman -S --noconfirm compton 
 
-    sudo pacman -Sy dunst 
+    sudo pacman -S --noconfirm dunst 
 
-    sudo pacman -S wget
-
-    sudo pacman -S ariac2
-
-    sudo pacman -S axel
+    sudo pacman -S --noconfirm wget 
+    
+    sudo pacman -S --noconfirm ariac2 
+    
+    sudo pacman -S --noconfirm axel  
 }
