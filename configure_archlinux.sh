@@ -1,11 +1,7 @@
-
-function install_depency() {
-
-    sudo pacman -Sy network-manager-applet
-
-    sudo pacman -S networkmanager
-}
-
+#!/usr/bin/env bash
+#Auther :Samray <samrayleung@gmail.com>
+#Description:
+# configure arch
 function enable_service() {
     # Enable lxde window manager, so arch will startup x11 automatically
     sudo systemctl enable lxdm

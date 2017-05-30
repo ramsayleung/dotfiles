@@ -153,7 +153,7 @@ function GetOSVersion {
             os_VENDOR=""
         done
         os_PACKAGE="rpm"
-    # If lsb_release is not installed, we should be able to detect Debian OS
+	# If lsb_release is not installed, we should be able to detect Debian OS
     elif [[ -f /etc/debian_version ]] && [[ $(cat /proc/version) =~ "Debian" ]]; then
         os_VENDOR="Debian"
         os_PACKAGE="deb"
@@ -185,8 +185,8 @@ function GetDistro {
             DISTRO="sle${os_RELEASE}sp${os_UPDATE}"
         fi
     elif [[ "$os_VENDOR" =~ (Red Hat) || \
-        "$os_VENDOR" =~ (CentOS) || \
-        "$os_VENDOR" =~ (OracleLinux) ]]; then
+		"$os_VENDOR" =~ (CentOS) || \
+		"$os_VENDOR" =~ (OracleLinux) ]]; then
         # Drop the . release as we assume it's compatible
         DISTRO="rhel${os_RELEASE::1}"
     elif [[ "$os_VENDOR" =~ (XenServer) ]]; then
@@ -196,4 +196,71 @@ function GetDistro {
         DISTRO="$os_VENDOR-$os_RELEASE.$os_UPDATE"
     fi
     export DISTRO
+}
+
+function msg() {
+    printf '%b\n' "$1" >&2
+}
+
+function success() {
+    if [ "$ret" -eq '0' ]; then
+        msg "\33[32m[✔]\33[0m ${1}${2}"
+    fi
+}
+
+function error() {
+    msg "\33[31m[✘]\33[0m ${1}${2}"
+    exit 1
+}
+
+function debug() {
+    if [ "$debug_mode" -eq '1' ] && [ "$ret" -gt '1' ]; then
+        msg "An error occurred in function \"${FUNCNAME[$i+1]}\" on line ${BASH_LINENO[$i+1]}, we're sorry for that."
+    fi
+}
+
+function program_exists() {
+    local ret='0'
+    command -v $1 >/dev/null 2>&1 || { local ret='1'; }
+
+    # fail on non-zero return value
+    if [ "$ret" -ne 0 ]; then
+        return 1
+    fi
+
+    return 0
+}
+
+function program_must_exist() {
+    program_exists $1
+
+    # throw error on non-zero return value
+    if [ "$?" -ne 0 ]; then
+        error "You must have '$1' installed to continue."
+    fi
+}
+
+function variable_must_set() {
+    if [ -z "$1" ]; then
+        error "You must have your HOME environmental variable set to continue."
+    fi
+}
+
+function lnif() {
+    if [ -e "$1" ]; then
+        ln -sf "$1" "$2"
+    fi
+    ret="$?"
+    debug
+}
+
+function do_backup() {
+    if [ -e "$1" ]; then
+        msg "Attempting to back up your original vim configuration."
+        today=`date +%Y%m%d_%s`
+        [ -e "$1" ] && [ ! -L "$1" ] && mv -v "$1" "$1.$today";
+        ret="$?"
+        success "Your original vim configuration has been backed up."
+        debug
+    fi
 }

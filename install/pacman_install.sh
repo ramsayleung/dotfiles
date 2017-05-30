@@ -19,13 +19,15 @@ function pacman_install(){
     # install tree
     sudo pacman -S --noconfirm tree
     # install shellcheck
-    sudo pacman -S --noconfirm ShellCheck 
+    sudo pacman -S --noconfirm shellcheck 
     # install guile
     sudo pacman -S --noconfirm guile 
     # install source-code-pro font
     sudo pacman -S --noconfirm adobe-source-code-pro-fonts 
     # install proxychains-ng
     sudo pacman -S --noconfirm proxychains-ng 
+
+    sudo pacman -S --noconfirm git
 
     sudo pacman -S --noconfirm pandoc 
 
@@ -49,7 +51,31 @@ function pacman_install(){
 
     sudo pacman -S --noconfirm wget 
     
-    sudo pacman -S --noconfirm ariac2 
+    sudo pacman -S --noconfirm bash-completion
+
+    sudo pacman -S --noconfirm fcitx
+
+    sudo pacman -S --noconfirm grub
+
+    sudo pacman -S --noconfirm alsa-utils alsa-plugins
+
+    sudo pacman -S --noconfirm xfce4-mixer
+
+    sudo pacman -S --noconfirm xfce4-pulseaudio-plugin
+
+    sudo pacman -S --noconfirm fcitx-im fcitx-configtool 
+
+    sudo pacman -S --noconfirm pavucontrol
+
+    sudo pacman -S --noconfirm patch
+
+    sudo pacman -S --noconfirm xfce4-screenshooter 
+
+    sudo pacman -S --noconfirm axel aria2
+
+    sudo pacman -S --noconfirm base-devel
+
+    sudo pacman -S --noconfirm noto-fonts-emoji
     
-    sudo pacman -S --noconfirm axel  
+    sudo pacman -S --noconfirm openssh
 }
