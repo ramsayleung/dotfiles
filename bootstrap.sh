@@ -10,6 +10,7 @@ fork_maintainer='0'
 
 source common_functions.sh
 source install_awesome_tool.sh
+source 
 
 sync_repo() {
     local repo_path="$1"

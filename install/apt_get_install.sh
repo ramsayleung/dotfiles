@@ -52,4 +52,12 @@ function apt_get_install() {
     sudo apt-get instal dunst -y
 
     sudo apt-get install i3-sensible-terminal -y
+
+    sudo apt-get install axel -y
+
+    sudo apt-get install aria2c -y
+
+    sudo apt-get install python-setuptools python-dev build-essential  -y
+
+    sudo easy_install pip -y
 }

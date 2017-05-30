@@ -7,6 +7,7 @@ source ./install/apt_get_install.sh
 source ./install/pacman_install.sh
 source ./install/brew_install.sh
 source ./install/yum_dnf_install.sh
+source ./install/pip_install.sh
 function install_awesome_tools() {
     if [ "$(uname)" == "Darwin" ]; then
 	# Do something under Mac OS X platform        
@@ -31,3 +32,6 @@ function install_awesome_tools() {
 	echo "this is 64-bit windows" 
     fi
 }
+
+
+pip_install

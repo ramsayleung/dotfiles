@@ -51,5 +51,13 @@ function centos_fedora_install() {
     sudo yum instal dunst -y
 
     sudo yum install i3-sensible-terminal -y
+
+    sudo yum install python-pip -y
+
+    sudo yum install python-wheel -y
+
+    sudo yum install aria2c -y
+
+    sudo yum install axel -y
 }
 

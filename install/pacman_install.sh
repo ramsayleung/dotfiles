@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 function pacman_install(){
+    # install pip
+    sudo pacman -S --noconfirm python-pip
     # install ag
     sudo pacman -S --noconfirm the_silver_searcher
     # install zeal
