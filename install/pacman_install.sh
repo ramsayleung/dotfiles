@@ -78,4 +78,6 @@ function pacman_install(){
     sudo pacman -S --noconfirm noto-fonts-emoji
     
     sudo pacman -S --noconfirm openssh
+
+    sudo pacman -S --noconfirm most
 }

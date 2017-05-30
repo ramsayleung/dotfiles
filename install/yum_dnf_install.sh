@@ -59,5 +59,7 @@ function centos_fedora_install() {
     sudo yum install aria2c -y
 
     sudo yum install axel -y
+
+    sudo yum install most -y
 }
 
