@@ -8,7 +8,7 @@
    Note: All tool could be installed by [[file:install_awesome_tool.sh][script: install_awesome_tool.sh]]
 ** Install
    #+BEGIN_SRC shell
-   git clone -b master git@github.com:samrayleung/Oh-my-unix.git ~/.oh-my-unix && sh  ~/.oh-my-unix/bootstrap.sh
+   git clone -b master git@github.com:samrayleung/Oh-my-unix.git ~/.oh-my-unix && cd  ~/.oh-my-unix && sh bootstrap.sh
    #+END_SRC
 ** Linux Special
    Even though Linux and Mac both are derived from Unix, but there are something

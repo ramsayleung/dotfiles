@@ -32,4 +32,8 @@ function install_awesome_tools() {
 	echo "this is 64-bit windows" 
     fi
 }
-
+function git_install() {
+    git clone -b master git@github.com:clvv/fasd.git /tmp/fasd
+    cd /tmp/fasd || exit
+    make install
+}

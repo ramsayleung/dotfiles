@@ -61,8 +61,6 @@ function pacman_install(){
 
     sudo pacman -S --noconfirm alsa-utils alsa-plugins
 
-    sudo pacman -S --noconfirm xfce4-mixer
-
     sudo pacman -S --noconfirm xfce4-pulseaudio-plugin
 
     sudo pacman -S --noconfirm fcitx-im fcitx-configtool 

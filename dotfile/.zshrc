@@ -49,7 +49,7 @@ ZSH_THEME="xiong-chiamiov-plus"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-wakatime zsh-syntax-highlighting z history sudo dnf python autojump)
+plugins=(git zsh-syntax-highlighting history sudo dnf python fasd)
 
 # User configuration
 
@@ -107,8 +107,6 @@ fi
 alias diff="colordiff"
 alias ports="netstat -tulanp"
 
-CURRENT_DIRECTORY=pwd
-APP_ROOT="$(dirname $CURRENT_DIRECTORY)"
+APP_PATH="$HOME/.oh-my-unix"
 
-
-source $APP_ROOT/tool_functions.sh
+source "$APP_PATH"/tool_functions.sh

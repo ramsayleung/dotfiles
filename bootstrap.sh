@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 ## Heavily inspire by spf-13 bootstrap.sh
 
+set -ex
 app_name='oh-my-unix'
 [ -z "$APP_PATH" ] && APP_PATH="$HOME/.oh-my-unix"
 debug_mode='0'
@@ -44,3 +45,4 @@ msg             "\nStart to install awesome tool"
 
 install_awesome_tools
 pip_install
+git_install
