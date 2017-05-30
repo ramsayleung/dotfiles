@@ -3,7 +3,7 @@
 
 # RDM Functions
 # ================
-set -ex
+set -x
 DEPS_DIR=$RDM_DIR/3rdparty/
 
 function build_breakpad {

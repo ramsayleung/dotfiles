@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/samray/.oh-my-zsh
+export ZSH=/home/samray/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -104,51 +104,11 @@ if exists percol; then
     zle -N percol_select_history
     bindkey '^R' percol_select_history
 fi
-#!/bin/bash
-#Autho:Samray
-#Description:
-#cat this file and >> .zshrc
-#customize alias
-alias vi="vim"
-alias rm="rm -rf"
-alias bd="cd .."
-alias mkdir="mkdir -dv"
 alias diff="colordiff"
 alias ports="netstat -tulanp"
 
-function mkcd(){
-    mkdir "$1"
-    cd "$1"
-}
-#!/bin/bash
-#Autho:Samray
-#Description:
-#cat this file and >> .zshrc
-#customize alias
-alias vi="vim"
-alias rm="rm -rf"
-alias bd="cd .."
-alias mkdir="mkdir -dv"
-alias diff="colordiff"
-alias ports="netstat -tulanp"
+CURRENT_DIRECTORY=pwd
+APP_ROOT="$(dirname $CURRENT_DIRECTORY)"
 
-function mkcd(){
-    mkdir "$1"
-    cd "$1"
-}
-#!/bin/bash
-#Autho:Samray
-#Description:
-#cat this file and >> .zshrc
-#customize alias
-alias vi="vim"
-alias rm="rm -rf"
-alias bd="cd .."
-alias mkdir="mkdir -dv"
-alias diff="colordiff"
-alias ports="netstat -tulanp"
 
-function mkcd(){
-    mkdir "$1"
-    cd "$1"
-}
+source $APP_ROOT/tool_functions.sh

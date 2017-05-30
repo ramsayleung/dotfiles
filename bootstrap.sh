@@ -3,14 +3,14 @@
 
 app_name='oh-my-unix'
 [ -z "$APP_PATH" ] && APP_PATH="$HOME/.oh-my-unix"
-[ -z "REPO_URI" ] && REPO_URI='git@github.com:samrayleung/Oh-my-unix.git'
+[ -z "$REPO_URI" ] && REPO_URI='git@github.com:samrayleung/Oh-my-unix.git'
 [ -z "$REPO_BRANCH" ] && REPO_BRANCH='master'
 debug_mode='0'
 fork_maintainer='0'
 
-source common_functions.sh
-source install_awesome_tool.sh
-source 
+source ./common_functions.sh
+source ./install_awesome_tool.sh
+source ./install/pip_install.sh
 
 sync_repo() {
     local repo_path="$1"
@@ -38,12 +38,12 @@ create_symlinks() {
     local source_path="$1"
     local target_path="$2"
 
-    lnif "$source_path/dotfile/aria2"         "$target_path/.aria2"
-    lnif "$source_path/dotfile/dunstrc"       "$target_path/.dunstrc"
-    lnif "$source_path/dotfile/keysnail.js"   "$target_path/.keysnail.js"
-    lnif "$source_path/dotfile/zshrc"         "$target_path/.zshrc"
+    lnif "$source_path/dotfile/.aria2"         "$target_path/.aria2"
+    lnif "$source_path/dotfile/.dunstrc"       "$target_path/.dunstrc"
+    lnif "$source_path/dotfile/.keysnail.js"   "$target_path/.keysnail.js"
+    lnif "$source_path/dotfile/.zshrc"         "$target_path/.zshrc"
     lnif "$source_path/dotfile/i3"         "$target_path/.config/i3"
-    lnif "$source_path/dotfile/Xmodmap"         "$target_path/.Xmodmap"
+    lnif "$source_path/dotfile/.Xmodmap"         "$target_path/.Xmodmap"
 
     ret="$?"
     success "Setting up symlinks."
@@ -70,4 +70,6 @@ create_symlinks "$APP_PATH" \
 msg             "\nThanks for installing $app_name."
 
 msg             "\nStart to install awesome tool"
+
 install_awesome_tools
+pip_install

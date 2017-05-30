@@ -2,12 +2,12 @@
 #Auther :Samray <samrayleung@gmail.com>
 #Description:
 # automatically install tool in different os such as OS X and Linux
-source ./commons_function.sh
+source ./common_functions.sh
 source ./install/apt_get_install.sh
 source ./install/pacman_install.sh
 source ./install/brew_install.sh
 source ./install/yum_dnf_install.sh
-source ./install/pip_install.sh
+set -x
 function install_awesome_tools() {
     if [ "$(uname)" == "Darwin" ]; then
 	# Do something under Mac OS X platform        
@@ -33,5 +33,3 @@ function install_awesome_tools() {
     fi
 }
 
-
-pip_install
