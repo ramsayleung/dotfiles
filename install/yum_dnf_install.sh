@@ -61,5 +61,9 @@ function centos_fedora_install() {
     sudo yum install axel -y
 
     sudo yum install most -y
+
+    sudo yum install xclip -y
+
+    sudo yum install zsh -y
 }
 

@@ -27,6 +27,15 @@ create_symlinks() {
     debug
 }
 
+# Install awesome programs with built-in package manager
+install_awesome_tools
+# Install awesome programs with pip
+pip_install
+# Install awesome programs with git and make install
+git_install
+
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 variable_must_set "$HOME"
 program_must_exist "git"
 
@@ -43,6 +52,3 @@ msg             "\nThanks for installing $app_name."
 
 msg             "\nStart to install awesome tool"
 
-install_awesome_tools
-pip_install
-git_install

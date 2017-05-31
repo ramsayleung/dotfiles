@@ -62,4 +62,9 @@ function apt_get_install() {
     sudo easy_install pip -y
 
     sudo apt-get install most -y
+
+    sudo apt-get install xclip -y
+
+    sudo apt-get install zsh -y
 }
+

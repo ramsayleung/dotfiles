@@ -80,4 +80,8 @@ function pacman_install(){
     sudo pacman -S --noconfirm openssh
 
     sudo pacman -S --noconfirm most
+
+    sudo pacman -S --noconfirm xclip
+
+    sudo pacman -S --noconfirm zsh
 }
