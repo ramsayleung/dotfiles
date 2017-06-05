@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
+
+CURRENT_DIRECTORY=pwd
+APP_ROOT="$(dirname $CURRENT_DIRECTORY)"
+source "$APP_ROOT"/common_functions.sh
+
+function pacman_install_dependency(){
+    program_exists "pip"
+    if [ "$?" -ne 0 ]; then
+	# install pip
+	sudo pacman -S --noconfirm python-pip
+    fi
+}
 function pacman_install(){
-    # install pip
-    sudo pacman -S --noconfirm python-pip
+    pacman_get_install_dependency
     # install ag
     sudo pacman -S --noconfirm the_silver_searcher
     # install zeal
@@ -84,4 +95,6 @@ function pacman_install(){
     sudo pacman -S --noconfirm xclip
 
     sudo pacman -S --noconfirm zsh
+
+    sudo pacman -S --noconfirm virtualbox
 }
