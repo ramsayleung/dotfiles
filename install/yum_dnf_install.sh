@@ -3,7 +3,20 @@
 #Description:
 # automatically install tool in Centos/Fedora
 
+CURRENT_DIRECTORY=pwd
+APP_ROOT="$(dirname $CURRENT_DIRECTORY)"
+source "$APP_ROOT"/common_functions.sh
+function yum_dnf_install_dependency(){
+    program_exists "pip"
+    if [ "$?" -ne 0 ]; then
+	sudo yum install python-pip -y
+	sudo yum install python-wheel -y
+    fi
+
+}
+
 function centos_fedora_install() {
+    yum_dnf_install_dependency
     # install ag
     sudo yum install -y the_silver_searcher
     # install zeal
@@ -52,12 +65,16 @@ function centos_fedora_install() {
 
     sudo yum install i3-sensible-terminal -y
 
-    sudo yum install python-pip -y
-
-    sudo yum install python-wheel -y
-
     sudo yum install aria2c -y
 
     sudo yum install axel -y
+
+    sudo yum install most -y
+
+    sudo yum install xclip -y
+
+    sudo yum install zsh -y
+
+    sudo yum install -y virtualbox
 }
 

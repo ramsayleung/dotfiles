@@ -35,5 +35,5 @@ function install_awesome_tools() {
 function git_install() {
     git clone -b master git@github.com:clvv/fasd.git /tmp/fasd
     cd /tmp/fasd || exit
-    make install
+    sudo make install
 }
