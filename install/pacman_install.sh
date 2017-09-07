@@ -97,4 +97,6 @@ function pacman_install(){
     sudo pacman -S --noconfirm zsh
 
     sudo pacman -S --noconfirm virtualbox
+
+    sudo pacman -S --noconfirm file-roller p7zip zip unzip unrar
 }

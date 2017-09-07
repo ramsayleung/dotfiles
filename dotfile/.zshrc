@@ -99,9 +99,17 @@ if exists percol; then
     zle -N percol_select_history
     bindkey '^R' percol_select_history
 fi
-alias diff="colordiff"
-alias ports="netstat -tulanp"
 
 APP_PATH="$HOME/.oh-my-unix"
 
 source "$APP_PATH"/tool_functions.sh
+
+alias diff="colordiff"
+alias ports="netstat -tulanp"
+alias e='emacsclient -t'
+# file sorted by size，lbys = ls by size
+alias lsbs='ls -alhS'
+
+# file sorted by time，lbyt = ls by time
+alias lsbt='ls -alht'
+
