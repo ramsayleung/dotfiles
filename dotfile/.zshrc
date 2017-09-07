@@ -86,9 +86,6 @@ source $ZSH/oh-my-zsh.sh
 # Set PAGER bash/zsh shell variable
 export PAGER="most"
 
-export MONGODB=/usr/local/my_softwares_and_tools/mongodb-linux-x86_64-rhel70-3.2.9
-export PATH=$PATH:$MONGODB/bin
-
 #percol configure ;you can display and search your zsh histories incrementally by pressing Ctrl + r key.
 function exists { which $1 &> /dev/null }
 
