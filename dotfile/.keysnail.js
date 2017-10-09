@@ -119,12 +119,12 @@ key.setGlobalKey(["C-x", "n"], function(ev) {
     OpenBrowserWindow();
 }, 'Open new window', false);
 
-key.setGlobalKey('C-M-h', function(ev) {
+key.setGlobalKey('C-M-l', function(ev) {
     getBrowser()
         .mTabContainer.advanceSelectedTab(1, true);
 }, 'Select next tab', false);
 
-key.setGlobalKey('C-M-l', function(ev) {
+key.setGlobalKey('C-M-h', function(ev) {
     getBrowser()
         .mTabContainer.advanceSelectedTab(-1, true);
 }, 'Select previous tab', false);
