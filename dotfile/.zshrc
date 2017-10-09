@@ -84,6 +84,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # Set PAGER bash/zsh shell variable
+export PAGER="most"
+
 #percol configure ;you can display and search your zsh histories incrementally by pressing Ctrl + r key.
 function exists { which $1 &> /dev/null }
 

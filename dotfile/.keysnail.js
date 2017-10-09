@@ -18,7 +18,7 @@ key.macroEndKey = "<f4>";
 key.suspendKey = "<f2>";
 key.universalArgumentKey = "C-u";
 key.negativeArgument1Key = "C--";
-key.negativeArgument2Key = "C-M--";
+kbrowser.tabs.remote.autostartey.negativeArgument2Key = "C-M--";
 key.negativeArgument3Key = "M--";
 
 // ================================= Hooks ================================= //
