@@ -18,7 +18,7 @@ key.macroEndKey = "<f4>";
 key.suspendKey = "<f2>";
 key.universalArgumentKey = "C-u";
 key.negativeArgument1Key = "C--";
-key.negativeArgument2Key = "C-M--";
+kbrowser.tabs.remote.autostartey.negativeArgument2Key = "C-M--";
 key.negativeArgument3Key = "M--";
 
 // ================================= Hooks ================================= //
@@ -119,12 +119,12 @@ key.setGlobalKey(["C-x", "n"], function(ev) {
     OpenBrowserWindow();
 }, 'Open new window', false);
 
-key.setGlobalKey('C-M-k', function(ev) {
+key.setGlobalKey('C-M-h', function(ev) {
     getBrowser()
         .mTabContainer.advanceSelectedTab(1, true);
 }, 'Select next tab', false);
 
-key.setGlobalKey('C-M-j', function(ev) {
+key.setGlobalKey('C-M-l', function(ev) {
     getBrowser()
         .mTabContainer.advanceSelectedTab(-1, true);
 }, 'Select previous tab', false);
