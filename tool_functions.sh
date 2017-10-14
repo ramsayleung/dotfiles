@@ -84,7 +84,7 @@ function config_ssh_login_key(){
     #check whether it is the first time to run this script and whether authorized_keys exists
     # ssh_host_and_user="$1@$2"
     authorized_keys="$HOME/.ssh/authorized_keys"
-    read -r -s -p "$user@$hostname's password:" password
+     printf "$user@$hostname's password:";read -r -s password
     if sshpass -pv $password ssh -p "$port" "$user@$hostname" test -e "$authorized_keys";then
 	echo "authorized key exists"
 	kill -INT $$
