@@ -26,7 +26,8 @@ floating_modifier $mod
 bindsym $mod+p exec i3lock-fancy
 
 # Font
-font pango:Source Code Pro 12
+# font pango:Source Code Pro 12
+font pango:System San Francisco Display 11
 
 # Gaps
 for_window [class="^.*"] border pixel 3
@@ -127,14 +128,14 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # Assigned workspaces
 # assign [class="Emacs"] workspace $workspace1
-assign [class="Firefox"] workspace $workspace2
-assign [class="google-chrome"] workspace $workspace3
+# assign [class="Firefox"] workspace $workspace2
+# assign [class="google-chrome"] workspace $workspace3
 # assign [class="jetbrains-idea"] workspace $workspace4
-assign [class="VirtualBox"] workspace $workspace5
-assign [class="urxvt"] workspace $workspace6
-assign [class="shadowsocks-qt5"] workspace $workspace7
-assign [class="netease-cloud-music"] workspace $workspace8
-assign [class="jetbrains-datagrip"] workspace $workspace9
+# assign [class="netease-cloud-music"] workspace $workspace5
+# assign [class="VirtualBox"] workspace $workspace5
+# assign [class="urxvt"] workspace $workspace6
+# assign [class="shadowsocks-qt5"] workspace $workspace7
+# assign [class="jetbrains-datagrip"] workspace $workspace9
 
 # Reload config file / restart i3 / exit i3
 bindsym $mod+Shift+c reload

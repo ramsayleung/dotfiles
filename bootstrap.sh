@@ -20,6 +20,7 @@ create_symlinks() {
     lnif "$source_path/dotfile/.keysnail.js"   "$target_path/.keysnail.js"
     lnif "$source_path/dotfile/.zshrc"         "$target_path/.zshrc"
     lnif "$source_path/dotfile/i3"         "$target_path/.config/i3"
+    lnif "$source_path/dotfile/termite" "$target_path/.config/termite"
     lnif "$source_path/dotfile/.Xmodmap"         "$target_path/.Xmodmap"
 
     ret="$?"
@@ -44,6 +45,7 @@ do_backup "$HOME/.dunstrc"
 do_backup "$HOME/.keysnail.js"
 do_backup "$HOME/.zshrc"
 do_backup "$HOME/.config/i3"
+do_backup "$HOME/.config/termite"
 
 create_symlinks "$APP_PATH" \
                 "$HOME"
