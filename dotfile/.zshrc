@@ -115,3 +115,5 @@ alias lsbs='ls -alhS'
 # file sorted by time，lbyt = ls by time
 alias lsbt='ls -alht'
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

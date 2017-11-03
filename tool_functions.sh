@@ -24,6 +24,9 @@ function pwdf()
     local copied_file=$(find $current_dir -type f -print |percol)
     echo -n "$copied_file" |pclip;
 }
+function pwdp(){
+    pwd|pclip;
+}
 # generate key
 function gkey(){
     if [ -n "$1" ];then
@@ -84,7 +87,7 @@ function config_ssh_login_key(){
     #check whether it is the first time to run this script and whether authorized_keys exists
     # ssh_host_and_user="$1@$2"
     authorized_keys="$HOME/.ssh/authorized_keys"
-     printf "$user@$hostname's password:";read -r -s password
+    printf "$user@$hostname's password:";read -r -s password
     if sshpass -pv $password ssh -p "$port" "$user@$hostname" test -e "$authorized_keys";then
 	echo "authorized key exists"
 	kill -INT $$

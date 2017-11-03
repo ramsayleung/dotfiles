@@ -1,13 +1,13 @@
 set $mod Mod4
 
 # Background
-exec_always feh --bg-scale /home/samray/Pictures/wallpaper/ocean.jpg
-# exec_always feh --bg-scale /home/samray/Pictures/wallpaper/UfntLlJ.jpg
+exec_always feh --bg-scale /home/samray/Pictures/wallpaper/Stars-at-night.png
 
 # Wifi applet
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
+
 # Floating window
-for_window [window_role="pop-up"]		floating enable
+for_window [window_role="pop-up"]		floating enable  
 for_window [window_role="bubble"]		floating enable
 for_window [window_role="task_dialog"]		floating enable
 for_window [window_role="dialog"]		floating enable
@@ -22,17 +22,16 @@ for_window [class="wolf3d"]			floating enable
 floating_modifier $mod
 
 # lock
-# bindsym crtl+alt+l exec i3lock -i ~/Pictures/wallpaper/screen.png
-bindsym $mod+p exec i3lock -i ~/Pictures/wallpaper/screen.png
+# bindsym $mod+p exec i3lock -i ~/Pictures/wallpaper/screen.png
+bindsym $mod+p exec i3lock-fancy
 
 # Font
 font pango:Source Code Pro 12
-# font pango:System San Francisco Display 11
 
 # Gaps
 for_window [class="^.*"] border pixel 3
-gaps inner 0
-gaps outer 0
+gaps inner  0
+gaps outer  0
 new_window normal
 
 # Animations
@@ -48,8 +47,8 @@ exec --no-startup-id dunst -config ~/.dunstrc
 bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # Keyboard shortcuts
-# bindsym $mod+Return exec termite
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
+# bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # Move focus
@@ -93,13 +92,13 @@ bindsym $mod+a focus parent
 # Workspaces - names
 
 set $workspace1 "1. "
-set $workspace2 "2. "
+set $workspace2 "2. "
 set $workspace3 "3. "
-set $workspace4 "4. "
-set $workspace5 "5. "
+set $workspace4 "4. "
+set $workspace5 "5. "
 set $workspace6 "6. "
 set $workspace7 "7. "
-set $workspace8 "8. "
+set $workspace8 "8. "
 set $workspace9 "9. "
 
 # Workspaces - switch
@@ -175,23 +174,23 @@ client.focused_inactive   $dark_base       $dark_base        #ffffff     $dark_b
 client.unfocused          $dark_base       $dark_base        #888888     $dark_base        $dark_accent
 
 bar {
-position top
-status_command i3blocks -c ~/.config/i3/i3blocks.conf
-# status_command i3blocks 
-colors {
-background	$bg-color
-separator	#757575
-focused_workspace	$bg-color	$bg-color	$text-color
-inactive_workspace	$inactive-bg	$inactive-bg	$inactive-text
-urgent_workspace		$urgent-bg	$urgent-bg	$text-color
-}
+    position top
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    # status_command i3blocks 
+    colors {
+	background	$bg-color
+	separator	#757575
+	focused_workspace	$bg-color	$bg-color	$text-color
+	inactive_workspace	$inactive-bg	$inactive-bg	$inactive-text
+	urgent_workspace		$urgent-bg	$urgent-bg	$text-color
+    }
 }
 # startup
 exec ss-qt5 
 exec_always fcitx 
 exec guake 
 exec emacs --debug-init
-exec  xautolock -time 15 -locker "i3lock -i ~/Pictures/wallpaper/screen.png"
+exec  xautolock -time 15 -locker "i3lock-fancy"
 # Keys
 exec_always xmodmap -e "clear lock" #disable caps lock switch
 exec_always xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
