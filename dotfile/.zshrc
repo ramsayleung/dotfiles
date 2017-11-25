@@ -49,7 +49,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting history sudo dnf python fasd)
+plugins=(git zsh-syntax-highlighting history sudo dnf python fasd zsh-autosuggestions)
 
 # User configuration
 
@@ -115,5 +115,6 @@ alias lsbs='ls -alhS'
 # file sorted by time，lbyt = ls by time
 alias lsbt='ls -alht'
 
+alias emc='emacsclient -c -nw'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

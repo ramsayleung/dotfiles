@@ -15,9 +15,9 @@ for_window [window_role="menu"]			floating enable
 for_window [window_role="GtkFileChooserDialog"]			floating enable, border normal, resize set 800 650
 for_window [window_role="Preferences"] floating enable
 
-for_window [class="Thunar"]			floating enable ;
+# for_window [class="Thunar"]			floating enable ;
 for_window [class="File-roller"] floating enable;
-for_window [class="Vlc"]			floating enable
+# for_window [class="Vlc"]			floating enable
 for_window [class="wolf3d"]			floating enable
 floating_modifier $mod
 
@@ -101,6 +101,7 @@ set $workspace6 "6. "
 set $workspace7 "7. "
 set $workspace8 "8. "
 set $workspace9 "9. "
+set $workspace10 "10. "
 
 # Workspaces - switch
 bindsym $mod+1 workspace $workspace1
@@ -188,10 +189,13 @@ bar {
 }
 # startup
 exec ss-qt5 
+exec dropbox-cli start
 exec_always fcitx 
 exec guake 
 exec emacs --debug-init
 exec  xautolock -time 15 -locker "i3lock-fancy"
+exec kcptun-client -r "43.245.223.164:45678" -l ":2080" --mode fast2 --key "123456" --quiet
+# exec xautolock -time 2 -locker "i3lock-fancy"
 # Keys
 exec_always xmodmap -e "clear lock" #disable caps lock switch
 exec_always xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
