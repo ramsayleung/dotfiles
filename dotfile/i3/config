@@ -1,7 +1,7 @@
 set $mod Mod4
 
 # Background
-exec_always feh --bg-scale /home/samray/Pictures/wallpaper/Stars-at-night.png
+exec_always feh --bg-scale /home/samray/Pictures/wallpaper/10-11.jpg
 
 # Wifi applet
 # exec --no-startup-id nm-applet
@@ -48,7 +48,7 @@ exec --no-startup-id dunst -config ~/.dunstrc
 bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # Keyboard shortcuts
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec xfce4-terminal --hide-menubar
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
@@ -160,18 +160,18 @@ bindsym Return mode "default"
 bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
+#F7F7F7
 # Colors and sheit
-set $bg-color			#2E3440
-set $inactive-bg		#37474F
+set $bg-color			#333333
+set $inactive-bg		#444444
 set $text-color			#F3F4F5
 set $inactive-text		#2E3440
-set $light_accent   #00bfff
-set $dark_base      #2E3440
-set $dark_accent    #6c5b7b
+set $light_accent   		#92E4C3
+set $dark_base      		#2E3440
+set $dark_accent    		#6c5b7b
 
-# class                   border           backgr.           text             indicator         child_border
-client.focused		        $light_accent	   $light_accent     #ffffff	        $light_accent     $light_accent
+# class                   border           backgr.           text        indicator         child_border
+client.focused	          $light_accent	   $light_accent     #ffffff     $light_accent     $light_accent
 client.focused_inactive   $dark_base       $dark_base        #ffffff     $dark_base        $dark_accent
 client.unfocused          $dark_base       $dark_base        #888888     $dark_base        $dark_accent
 
@@ -180,11 +180,11 @@ bar {
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     # status_command i3blocks 
     colors {
-	background	$bg-color
-	separator	#757575
+	background		$bg-color
+	separator		#757575
 	focused_workspace	$bg-color	$bg-color	$text-color
 	inactive_workspace	$inactive-bg	$inactive-bg	$inactive-text
-	urgent_workspace		$urgent-bg	$urgent-bg	$text-color
+	urgent_workspace	$urgent-bg	$urgent-bg	$text-color
     }
 }
 # startup
