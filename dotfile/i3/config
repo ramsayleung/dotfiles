@@ -94,10 +94,10 @@ bindsym $mod+a focus parent
 
 set $workspace1 "1. "
 set $workspace2 "2. "
-set $workspace3 "3. "
+set $workspace3 "3. "
 set $workspace4 "4. "
 set $workspace5 "5. "
-set $workspace6 "6. "
+set $workspace6 "6. "
 set $workspace7 "7. "
 set $workspace8 "8. "
 set $workspace9 "9. "
@@ -192,7 +192,7 @@ exec ss-qt5
 exec dropbox-cli start
 exec_always fcitx 
 exec guake 
-exec emacs --debug-init
+exec emacs --debug-init --daemon
 exec  xautolock -time 15 -locker "i3lock-fancy"
 exec kcptun-client -r "43.245.223.164:45678" -l ":2080" --mode fast2 --key "123456" --quiet
 # exec xautolock -time 2 -locker "i3lock-fancy"
