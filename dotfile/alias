@@ -1,1 +1,4 @@
-alias e='emacsclient -t'
+alias e="emacsclient -c -n -F '((fullscreen . maximized))'"
+alias enw="emacsclient --eval '(ramsay/set-font)' -c -n -F '((fullscreen . maximized))'"
+alias egs="e --eval '(progn(magit-status)(delete-other-windows))'"
+alias npm='tnpm'

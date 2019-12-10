@@ -2,14 +2,12 @@
 ## Heavily inspire by spf-13 bootstrap.sh
 
 set -ex
-app_name='oh-my-unix'
-[ -z "$APP_PATH" ] && APP_PATH="$HOME/.oh-my-unix"
+app_name='ramsayconf'
+[ -z "$APP_PATH" ] && APP_PATH="$HOME/$app_name"
 debug_mode='0'
-fork_maintainer='0'
 
 source ./common_functions.sh
 source ./install_awesome_tool.sh
-source ./install/pip_install.sh
 
 create_symlinks() {
     local source_path="$1"
@@ -28,17 +26,13 @@ create_symlinks() {
     debug
 }
 
-# Install awesome programs with built-in package manager
+# Install awesome programs with built-in package manager/pip/git
 install_awesome_tools
-# Install awesome programs with pip
-pip_install
-# Install awesome programs with git and make install
-git_install
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 variable_must_set "$HOME"
-program_must_exist "git"
 
 do_backup "$HOME/.aria2"
 do_backup "$HOME/.dunstrc"
