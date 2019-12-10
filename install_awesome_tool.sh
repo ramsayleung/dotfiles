@@ -47,74 +47,77 @@ function pacman_install(){
     pacman_get_install_dependency
 
     echo "start to install git"
-    sudo pacman -S --noconfirm git
+    program_exists "git" || sudo pacman -S --noconfirm git
 
     echo "start to install rg"
-    sudo pacman -S --noconfirm ripgrep
+    program_exists "rg" || sudo pacman -S --noconfirm ripgrep
 
     echo "start to install tokei"
-    sudo pacman -S --noconfirm tokei
+    program_exists "tokei" || sudo pacman -S --noconfirm tokei
 
     echo "start to install httpie"
-    sudo pacman -S --noconfirm httpie
+    program_exists "http" || sudo pacman -S --noconfirm httpie
 
     echo "start to install htop"
-    sudo pacman -S --noconfirm htop
+    program_exists "htop" || sudo pacman -S --noconfirm htop
 
     echo "start to install ncdu"
-    sudo pacman -S --noconfirm ncdu
+    program_exists "ncdu" || sudo pacman -S --noconfirm ncdu
 
     echo "start to install vim"
-    sudo pacman -S --noconfirm vim
+    program_exists "vim" || sudo pacman -S --noconfirm vim
 
     echo "start to install emacs"
-    sudo pacman -S --noconfirm emacs
+    program_exists "emacs" || sudo pacman -S --noconfirm emacs
 
     ehco "start to install tree"
-    sudo pacman -S --noconfirm tree
+    program_exists "tree" || sudo pacman -S --noconfirm tree
 
     echo "start to install shellcheck"
-    sudo pacman -S --noconfirm shellcheck 
+    program_exists "shellcheck" || sudo pacman -S --noconfirm shellcheck 
     
     echo "start to install proxychains-ng"
-    sudo pacman -S --noconfirm proxychains-ng 
+    program_exists "proxychains4" || sudo pacman -S --noconfirm proxychains-ng 
 
     echo "start to install markdown"
-    sudo pacman -S --noconfirm markdown
+    program_exists "markdown" || sudo pacman -S --noconfirm markdown
 
     echo "start to install fcitx"
-    sudo pacman -S --noconfirm fcitx
+    program_exists "fcitx" || sudo pacman -S --noconfirm fcitx
 
     echo "start to install aria2"
-    sudo pacman -S --noconfirm aria2
+    program_exists "aria2c" || sudo pacman -S --noconfirm aria2
     
     echo "start to install most"
-    sudo pacman -S --noconfirm most
+    program_exists "most" || sudo pacman -S --noconfirm most
 
     echo "start to install zsh"
-    sudo pacman -S --noconfirm zsh
+    program_exists "zsh" || sudo pacman -S --noconfirm zsh
 
-    echo "start to install p7zip/zip/unzip/unrar"
-    sudo pacman -S --noconfirm p7zip zip unzip unrar
+    echo "start to install p7zip"
+    program_exists "p7zip" || sudo pacman -S --noconfirm p7zip
+
+    echo "start to install zip"
+    program_exists "zip" || sudo pacman -S --noconfirm zip
 
     echo "start to install tldr"
-    sudo pacman -S --noconfirm tldr
+    program_exists "tldr" || sudo pacman -S --noconfirm tldr
 
     echo "start to install fd"
-    sudo pacman -S fd --noconfirm
+    program_exists "fd" || sudo pacman -S fd --noconfirm
 
     echo "start to install bat"
-    sudo pacman -S bat --noconfirm
+    program_exists "bat" || sudo pacman -S bat --noconfirm
+
+    echo "start to install fcitx-configtool"
+    program_exists "fcitx-configtool" || sudo pacman -S --noconfirm fcitx-configtool 
+
+    echo "start to install pavucontrol"
+    program_exists "pavucontrol" || sudo pacman -S --noconfirm pavucontrol
 
     sudo pacman -S --noconfirm alsa-utils alsa-plugins
 
     sudo pacman -S --noconfirm xfce4-pulseaudio-plugin
-
-    sudo pacman -S --noconfirm fcitx-im fcitx-configtool 
-
-    sudo pacman -S --noconfirm pavucontrol
-
-    sudo pacman -S --noconfirm patch
 }
 
 function brew_install() {
