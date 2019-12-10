@@ -95,7 +95,7 @@ function pacman_install(){
     program_exists "zsh" || sudo pacman -S --noconfirm zsh
 
     echo "start to install p7zip"
-    program_exists "p7zip" || sudo pacman -S --noconfirm p7zip
+    program_exists "7zr" || sudo pacman -S --noconfirm p7zip
 
     echo "start to install zip"
     program_exists "zip" || sudo pacman -S --noconfirm zip
@@ -115,9 +115,9 @@ function pacman_install(){
     echo "start to install pavucontrol"
     program_exists "pavucontrol" || sudo pacman -S --noconfirm pavucontrol
 
-    sudo pacman -S --noconfirm alsa-utils alsa-plugins
+    sudo pacman -S --noconfirm --needed alsa-utils alsa-plugins
 
-    sudo pacman -S --noconfirm xfce4-pulseaudio-plugin
+    sudo pacman -S --noconfirm --needed xfce4-pulseaudio-plugin
 }
 
 function brew_install() {
