@@ -121,7 +121,8 @@ function pacman_install(){
 
     sudo pacman -S --noconfirm --needed alsa-utils alsa-plugins
 
-    sudo pacman -S --noconfirm --needed xfce4-pulseaudio-plugin
+    echo "start to install fzf"
+    program_exists "fzf" || sudo pacman -S --noconfirm fzf
 }
 
 # Install package by brew(For MacOs)
@@ -165,6 +166,12 @@ function brew_install() {
 
     echo "start to install bat"
     program_exists "bat" || brew install bat
+
+    echo "start to install exa"
+    program_exists "exa" || brew install exa
+
+    echo "start to install fzf"
+    program_exists "fzf" || brew install fzf
 
     echo "Done"
 }
@@ -222,6 +229,9 @@ function apt_get_install() {
 
     echo "start to install zsh"
     program_exists "zsh" || sudo apt-get install zsh -y
+
+    echo "start to install fzf"
+    program_exists "fzf" || sudo apt-get install -y fzf
 }
 
 
@@ -279,13 +289,23 @@ function centos_fedora_install() {
 
     echo "start to install zsh"
     program_exists "zsh" || sudo yum install zsh -y
+
+    echo "start to install fzf"
+    program_exists "fzf" || sudo yum install -y fzf
 }
 
 # Install python packages by pip.
 function pip_install {
     program_must_exist "pip"
-    pip install percol --user
-    pip install git+https://github.com/jeffkaufman/icdiff.git --user
+
+    echo "start to install percol."
+    program_exists "percol" || pip install percol --user
+
+    echo "start to instlal icdiff."
+    program_exists "icdiff" || pip install git+https://github.com/jeffkaufman/icdiff.git --user
+
+    echo "start to instlal tldr."
+    program_exists "tldr" || pip install tldr --user
 }
 
 # Install python packages by pip3.
