@@ -6,11 +6,12 @@
 # Enable debug
 # set -x
 
+# Check if program exists
 function program_exists() {
     local ret='0'
     command -v $1 >/dev/null 2>&1 || { local ret='1'; }
 
-    # fail on non-zero return value
+    # fail on non-zero return value.
     if [ "$ret" -ne 0 ]; then
         return 1
     fi
@@ -18,6 +19,7 @@ function program_exists() {
     return 0
 }
 
+# Assert the special programs must exist.
 function program_must_exist() {
     program_exists $1
 
@@ -27,6 +29,7 @@ function program_must_exist() {
     fi
 }
 
+# Install packages which don't provide binary package by git.
 function git_install() {
     program_must_exist "git"
 
@@ -43,6 +46,7 @@ function pacman_install_dependency(){
     fi
 }
 
+# Install packages by pacman(For Archlinux)
 function pacman_install(){
     pacman_get_install_dependency
 
@@ -88,8 +92,8 @@ function pacman_install(){
     echo "start to install aria2"
     program_exists "aria2c" || sudo pacman -S --noconfirm aria2
     
-    echo "start to install most"
-    program_exists "most" || sudo pacman -S --noconfirm most
+    echo "start to install mosh"
+    program_exists "mosh" || sudo pacman -S --noconfirm mosh
 
     echo "start to install zsh"
     program_exists "zsh" || sudo pacman -S --noconfirm zsh
@@ -120,6 +124,7 @@ function pacman_install(){
     sudo pacman -S --noconfirm --needed xfce4-pulseaudio-plugin
 }
 
+# Install package by brew(For MacOs)
 function brew_install() {
     type brew>/dev/null 2>&1 || {
 	echo >&2 " require brew but it's not installed.  Aborting.";
@@ -173,64 +178,50 @@ function apt_get_install_dependency(){
     fi
 }
 
+# Install packages by apt-get(For Debian/Ubuntu-based distributions)
 function apt_get_install() {
     apt_get_install_dependency
-    # install htop
-    sudo apt-get install htop -y
-    # install httpie
-    sudo apt-get install httpie -y
-    # install ag
-    sudo apt-get install  silversearcher-ag -y
-    # install zeal
-    sudo apt-get install zeal -y
-    # install ncdu
-    sudo apt-get install ncdu -y
-    # install i3
-    sudo apt-get install i3 -y
-    # install emacs (i could die without it)
-    sudo apt-get install emacs -y
-    # install vim
-    sudo apt-get install vim -y
-    # install tree
-    sudo apt-get install tree -y
-    # install shellcheck
-    sudo apt-get install shellcheck -y
-    # install guile (scheme compiler)
-    sudo apt-get install guile-2.0 -y
-    # install proxychains
-    sudo apt-get install proxychains -y
-    # install pandoc
-    sudo apt-get install pandoc -y
+    echo "start to install htop"
+    program_exists "htop" || sudo apt-get install htop -y
 
-    sudo apt-get install markdown -y
+    echo "start to install httpie"
+    program_exists "http" || sudo apt-get install httpie -y
 
-    sudo apt-get install cloc -y
+    echo "start to install ncdu"
+    program_exists "ncdu" || sudo apt-get install ncdu -y
 
-    sudo apt-get install i3lock -y
+    echo "start to install emacs"
+    program_exists "emacs" || sudo apt-get install emacs -y
 
-    sudo apt-get install rofi -y
+    echo "start to install vim"
+    program_exists "vim" || sudo apt-get install vim -y
 
-    sudo apt-get install feh -y
+    echo "start to install tree"
+    program_exists "tree" || sudo apt-get install tree -y
 
-    sudo apt-get install nm-applet -y
+    echo "start to install shellcheck"
+    program_exists "shellcheck" || sudo apt-get install shellcheck -y
 
-    sudo apt-get install compton -y
+    echo "start to install proxychains"
+    program_exists "proxychains4" || sudo apt-get install proxychains -y
 
-    sudo apt-get instal dunst -y
+    echo "start to install pandoc"
+    program_exists "pandoc" || sudo apt-get install pandoc -y
 
-    sudo apt-get install i3-sensible-terminal -y
+    echo "start to install markdown"
+    program_exists "markdown" || sudo apt-get install markdown -y
 
-    sudo apt-get install axel -y
+    echo "start to install tokei"
+    program_exists "tokei" || sudo apt-get install tokei -y
 
-    sudo apt-get install aria2c -y
+    echo "start to install aria2c"
+    program_exists "aria2c" || sudo apt-get install aria2c -y
 
-    sudo apt-get install most -y
+    echo "start to install mosh"
+    program_exists "mosh" || sudo apt-get install mosh -y
 
-    sudo apt-get install xclip -y
-
-    sudo apt-get install zsh -y
-
-    sudo apt-get install -y virtualbox
+    echo "start to install zsh"
+    program_exists "zsh" || sudo apt-get install zsh -y
 }
 
 
@@ -243,75 +234,61 @@ function yum_dnf_install_dependency(){
 
 }
 
+# Install packages by yum(For Centos/Fedora/RedHat-based distributions)
 function centos_fedora_install() {
     yum_dnf_install_dependency
-    # install ag
-    sudo yum install -y the_silver_searcher
-    # install zeal
-    sudo yum install -y zeal
-    # install httpie
-    sudo yum install -y httpie
-    # install htop 
-    sudo yum install -y htop
-    # install ncdu
-    sudo yum install -y ncdu
-    # install vim
-    sudo yum install -y vim
-    # install emacs
-    sudo yum install -y emacs
-    # install i3
-    sudo yum install -y i3
-    # install tree
-    sudo yum install -y tree
-    # install shellcheck
-    sudo yum install ShellCheck -y
-    # install guile
-    sudo yum install guile -y
-    # install source  code pro font
-    sudo yum install adobe-source-code-pro-fonts -y
-    # install proxychains-ng
-    sudo yum install proxychains-ng -y
 
-    sudo yum install pandoc -y
+    echo "start to install httpie"
+    program_exists "http" || sudo yum install -y httpie
 
-    sudo yum install markdown -y
+    echo "start to install htop"
+    program_exists "htop" || sudo yum install -y htop
 
-    # count line and space in code
-    sudo yum install cloc  -y
+    echo "start to install ncdu"
+    program_exists "ncdu" || sudo yum install -y ncdu
 
-    sudo yum install i3lock -y
+    echo "start to install vim"
+    program_exists "vim" || sudo yum install -y vim
 
-    sudo yum install rofi -y
+    echo "start to install emacs"
+    program_exists "emacs" || sudo yum install -y emacs
 
-    sudo yum install feh -y
+    echo "start to install tree"
+    program_exists "tree" || sudo yum install -y tree
 
-    sudo yum install nm-applet -y
+    echo "start to install shellcheck"
+    program_exists "shellcheck" || sudo yum install ShellCheck -y
 
-    sudo yum install compton -y
+    echo "start to install proxychains-ng"
+    program_exists "proxychains4" || sudo yum install proxychains-ng -y
 
-    sudo yum instal dunst -y
+    echo "start to install pandoc"
+    program_exists "pandoc" || sudo yum install pandoc -y
 
-    sudo yum install i3-sensible-terminal -y
+    echo "start to install markdown"
+    program_exists "markdown" || sudo yum install markdown -y
 
-    sudo yum install aria2c -y
+    echo "start to install tokei"
+    program_exists "tokei" || sudo yum install tokei  -y
 
-    sudo yum install axel -y
+    echo "start to install aria2c"
+    program_exists "aria2c" || sudo yum install aria2c -y
 
-    sudo yum install most -y
+    echo "start to install mosh"
+    program_exists "mosh" || sudo yum install mosh -y
 
-    sudo yum install xclip -y
-
-    sudo yum install zsh -y
-
-    sudo yum install -y virtualbox
+    echo "start to install zsh"
+    program_exists "zsh" || sudo yum install zsh -y
 }
 
+# Install python packages by pip.
 function pip_install {
     program_must_exist "pip"
     pip install percol --user
     pip install git+https://github.com/jeffkaufman/icdiff.git --user
 }
 
+# Install python packages by pip3.
 function pip3_install {
     program_must_exist "pip3"
     pip3 install percol --user
