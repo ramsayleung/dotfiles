@@ -24,9 +24,11 @@ function pwdf()
     local copied_file=$(find $current_dir -type f -print |percol)
     echo -n "$copied_file" |pclip;
 }
+
 function pwdp(){
     pwd|pclip;
 }
+
 # generate key
 function gkey(){
     if [ -n "$1" ];then
@@ -41,24 +43,29 @@ function gkey(){
 	cat /dev/urandom |tr -cd "[:alnum:]"|head -c "$length";echo
     fi
 }
+
 #check the disk usage,combine du and sort
 function muse(){
     du -chs * | sort -rh | head -11
 }
 
 # select git commit
-function sgc(){
-    git log --pretty=oneline |percol|cut -d " " -f 1
+function sgl(){
+    git log --pretty=oneline | fzf |cut -d " " -f 1,2
 }
 
 # select git branch
 function sgb(){
-    git branch | percol
+    git branch | fzf
 }
 
-#Help you quickly config public/private key for ssh login
-#generate public/private rsa key pair,and then ssh login remote server with public/private key
-#,hence we could login quickly without enter password each times
+function sgc(){
+    git checkout $(sgb)
+}
+
+# Help you quickly config public/private key for ssh login
+# generate public/private rsa key pair,and then ssh login remote server with public/private key
+# hence we could login quickly without enter password each times
 
 function config_ssh_login_key(){
     if [ $# -lt 3 ];then
@@ -118,23 +125,23 @@ function replace_spaces_to_underscores {
         mv "$file" $( echo $file | tr ' ' '_' ) ;
     done 
 }
-function ppgrep() {
+function fgrep() {
     if [[ $1 == "" ]]; then
-        PERCOL=percol
+        FZF=fzf
     else
-        PERCOL="percol --query $1"
+        FZF="fzf -q $1"
     fi
-    ps aux | eval $PERCOL | awk '{ print $2 }'
+    ps aux | eval $FZF | awk '{ print $2 }'
 }
 
-function ppkill() {
+function fkill() {
     if [[ $1 =~ "^-" ]]; then
         QUERY=""            # options only
     else
         QUERY=$1            # with a query
         [[ $# -gt 0 ]] && shift
     fi
-    ppgrep $QUERY | xargs kill $*
+    fgrep $QUERY | xargs kill $*
 }
 
 function proxy_off() {
@@ -148,35 +155,11 @@ function proxy_on(){
     export https_proxy=$http_proxy
     echo -e "proxy is on"
 }
+
 function mkcd(){
     target_dir="$1"
     mkdir "$target_dir"
     cd "$target_dir"
-}
-# #to enable fasd
-function enable_fasd(){
-    eval "$(fasd --init auto)"
-    alias a='fasd -a'        # any
-    alias s='fasd -si'       # show / search / select
-    alias d='fasd -d'        # directory
-    alias f='fasd -f'        # file
-    alias sd='fasd -sid'     # interactive directory selection
-    alias sf='fasd -sif'     # interactive file selection
-    alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-    alias zz='fasd_cd -d -i' # cd with interactive selection
-}
-enable_fasd
-
-function setup_alias(){
-    alias vi="vim"
-    alias axel="axel -n 10"
-    alias aria2c="aria2c -x 10"
-    alias rm="rm -rf"
-    alias bd="cd .."
-    alias mkdir="mkdir -v"
-    alias diff="colordiff"
-    alias ports="netstat -tulanp"
-    alias npm="cnpm"
 }
 
 #
